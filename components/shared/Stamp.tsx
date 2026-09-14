@@ -1,11 +1,12 @@
 import { cx } from "@/lib/utils";
 
 /**
- * The round shop stamp.
+ * The round shop stamp, echoing the circular sticker on Bearkery's packaging.
  *
- * Taken from the real circular sticker on Bearkery's packaging — reusing it
- * on screen is what ties the website to the box the customer actually holds.
- * It recurs as a badge, a section marker, and the confirmation "stamp".
+ * Sizing note: the square ratio is enforced with an inline style rather than
+ * the `aspect-square` utility, because a caller's own positioning classes can
+ * override the utility and stretch the circle into a capsule. Callers set the
+ * width; height always follows.
  */
 export default function Stamp({
   label = "BEARKERY BOX",
@@ -21,11 +22,14 @@ export default function Stamp({
   return (
     <div
       className={cx(
-        "relative flex aspect-square items-center justify-center rounded-full border-2 border-dashed border-caramel/50 bg-surface/80",
+        "relative flex items-center justify-center rounded-full border-2 border-dashed border-caramel/50 bg-surface/80",
         animate && "animate-stampDown",
         className
       )}
-      style={{ transform: animate ? undefined : "rotate(-6deg)" }}
+      style={{
+        aspectRatio: "1 / 1",
+        transform: animate ? undefined : "rotate(-6deg)",
+      }}
       aria-hidden="true"
     >
       <div className="flex flex-col items-center leading-none">

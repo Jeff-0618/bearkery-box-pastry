@@ -4,8 +4,6 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Clock } from "lucide-react";
 import Bear from "@/components/shared/Bear";
-import Stamp from "@/components/shared/Stamp";
-import { Sprig } from "@/components/shared/Atmosphere";
 import { useTimeOfDay } from "@/lib/use-time-of-day";
 import { cx } from "@/lib/utils";
 
@@ -104,9 +102,7 @@ export default function Hero() {
             aria-hidden="true"
             className="absolute bottom-4 left-1/2 h-6 w-2/3 -translate-x-1/2 rounded-[50%] bg-cocoa/[0.09] blur-xl"
           />
-          <Sprig className="absolute -left-1 bottom-1 hidden h-24 w-16 sm:block" />
           <Bear priority className="relative w-[260px] sm:w-[330px]" />
-          <Stamp className="absolute -right-1 top-2 w-20 text-base sm:w-24" />
         </motion.div>
       </div>
     </section>
