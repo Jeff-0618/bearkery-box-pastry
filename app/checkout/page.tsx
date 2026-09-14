@@ -12,7 +12,6 @@ import { createPayment, IS_DEMO } from "@/lib/payment";
 import { BUSINESS, ADDRESS_ONE_LINE } from "@/lib/business";
 import { Order } from "@/lib/types";
 import OrderSummary from "@/components/cart/OrderSummary";
-import LayeredBear from "@/components/shared/LayeredBear";
 import { Badge } from "@/components/ui/Badge";
 
 export default function CheckoutPage() {
@@ -91,9 +90,6 @@ export default function CheckoutPage() {
   return (
     <div className="container-bx py-12">
       <div className="mb-8 flex items-center gap-4">
-        <div className="h-16 w-16 shrink-0">
-          <LayeredBear look={false} />
-        </div>
         <h1 className="text-3xl font-medium">Checkout</h1>
       </div>
 

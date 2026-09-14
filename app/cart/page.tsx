@@ -5,7 +5,7 @@ import { AnimatePresence } from "framer-motion";
 import { useCart } from "@/lib/cart-context";
 import CartLineItem from "@/components/cart/CartLineItem";
 import OrderSummary from "@/components/cart/OrderSummary";
-import LayeredBear from "@/components/shared/LayeredBear";
+import Bear from "@/components/shared/Bear";
 
 export default function CartPage() {
   const { items, subtotal } = useCart();
@@ -13,13 +13,12 @@ export default function CartPage() {
   if (items.length === 0) {
     return (
       <div className="container-bx flex flex-col items-center gap-4 py-24 text-center">
-        <div className="w-32">
-          <LayeredBear mood="resting" priority />
+        <div className="w-36">
+          <Bear priority />
         </div>
         <h1 className="text-2xl font-medium">Your gift basket is waiting to be filled</h1>
         <p className="max-w-sm text-taupe">
-          Our teddy is waiting patiently — browse a collection and add a little
-          sweetness, made to order just for you.
+          Nothing in here yet. Have a look at what we&apos;re baking today.
         </p>
         <Link href="/collections" className="btn-primary mt-2">
           Shop Collections

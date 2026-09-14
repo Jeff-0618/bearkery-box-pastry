@@ -3,10 +3,11 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Clock } from "lucide-react";
-import LayeredBear from "@/components/shared/LayeredBear";
+import Bear from "@/components/shared/Bear";
 import Stamp from "@/components/shared/Stamp";
 import { Sprig } from "@/components/shared/Atmosphere";
 import { useTimeOfDay } from "@/lib/use-time-of-day";
+import { cx } from "@/lib/utils";
 
 const EASE = [0.22, 0.61, 0.36, 1] as const;
 
@@ -34,7 +35,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: EASE }}
           >
-            <span className="t-eyebrow">{time.greeting}</span>
+            <span className={cx("t-eyebrow transition-opacity duration-500", time.ready ? "opacity-100" : "opacity-0")}>{time.greeting}</span>
             <span className="h-1 w-1 rounded-full bg-caramel/40" />
             <span className="t-eyebrow font-normal normal-case tracking-normal text-taupe">
               Seri Kembangan
@@ -104,11 +105,7 @@ export default function Hero() {
             className="absolute bottom-4 left-1/2 h-6 w-2/3 -translate-x-1/2 rounded-[50%] bg-cocoa/[0.09] blur-xl"
           />
           <Sprig className="absolute -left-1 bottom-1 hidden h-24 w-16 sm:block" />
-          <LayeredBear
-            mood="greet"
-            priority
-            className="relative w-[230px] sm:w-[300px]"
-          />
+          <Bear priority className="relative w-[260px] sm:w-[330px]" />
           <Stamp className="absolute -right-1 top-2 w-20 text-base sm:w-24" />
         </motion.div>
       </div>

@@ -15,6 +15,8 @@ import { useEffect, useState } from "react";
 export type DayPart = "morning" | "afternoon" | "evening";
 
 export interface TimeOfDay {
+  /** False until the real local time has been read on the client. */
+  ready?: boolean;
   part: DayPart;
   greeting: string;
   line: string;
@@ -25,6 +27,7 @@ export interface TimeOfDay {
 }
 
 function resolve(hour: number): TimeOfDay {
+  // Shop hours are 7:00–18:00; sandwiches are collected 7:00–11:00.
   if (hour >= 5 && hour < 11) {
     return {
       part: "morning",
@@ -43,10 +46,11 @@ function resolve(hour: number): TimeOfDay {
       sandwichWindowOpen: false,
     };
   }
+  // 18:00 onwards — the shop has closed for the day.
   return {
     part: "evening",
     greeting: "Good evening",
-    line: "The oven's cooling down. Order ahead and we'll bake it fresh tomorrow.",
+    line: "We've closed for the night. Order ahead and we'll bake it fresh in the morning.",
     light: "bg-night",
     sandwichWindowOpen: false,
   };
@@ -55,11 +59,15 @@ function resolve(hour: number): TimeOfDay {
 export function useTimeOfDay(): TimeOfDay {
   // Start on a stable value so server and client markup match, then settle to
   // the real local time after mount.
-  const [state, setState] = useState<TimeOfDay>(() => resolve(9));
+  const [state, setState] = useState<TimeOfDay>(() => ({
+    ...resolve(9),
+    ready: false,
+  }));
 
   useEffect(() => {
-    setState(resolve(new Date().getHours()));
-    const id = setInterval(() => setState(resolve(new Date().getHours())), 60_000);
+    const read = () => setState({ ...resolve(new Date().getHours()), ready: true });
+    read();
+    const id = setInterval(read, 60_000);
     return () => clearInterval(id);
   }, []);
 

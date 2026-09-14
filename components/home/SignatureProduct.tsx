@@ -2,7 +2,6 @@ import Link from "next/link";
 import { getProduct } from "@/lib/data";
 import { formatPrice } from "@/lib/utils";
 import LazyImage from "@/components/shared/LazyImage";
-import LayeredBear from "@/components/shared/LayeredBear";
 import Reveal from "@/components/shared/Reveal";
 
 /**
@@ -30,8 +29,6 @@ export default function SignatureProduct() {
             aria-hidden="true"
             className="absolute -bottom-4 left-1/2 h-6 w-1/2 -translate-x-1/2 rounded-[50%] bg-cocoa/[0.08] blur-xl"
           />
-          {/* Behind-and-below: he belongs to the same space as the photo. */}
-          <LayeredBear className="absolute -bottom-8 -left-6 -z-10 w-32 sm:-left-14 sm:w-44" />
         </Reveal>
 
         <Reveal delay={0.1}>

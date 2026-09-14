@@ -15,7 +15,6 @@ import FulfillmentToggle from "@/components/product/FulfillmentToggle";
 import DeliveryDatePicker from "@/components/product/DeliveryDatePicker";
 import GiftDetailsForm from "@/components/product/GiftDetailsForm";
 import ProductCard from "@/components/product/ProductCard";
-import LayeredBear from "@/components/shared/LayeredBear";
 import { useFlyToCart } from "@/components/shared/FlyToCart";
 import { Badge } from "@/components/ui/Badge";
 
@@ -100,9 +99,6 @@ export default function ProductDetailClient({
             className="aspect-square w-full rounded-soft shadow-lifted"
             priority
           />
-          <div className="absolute -bottom-6 -right-6 h-24 w-24 drop-shadow-xl sm:h-28 sm:w-28">
-            <LayeredBear reactKey={added ? "added" : "idle"} />
-          </div>
           {product.images.length > 1 && (
             <div className="mt-3 flex gap-2.5">
               {product.images.map((img, i) => (
