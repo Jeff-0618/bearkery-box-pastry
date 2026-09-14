@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { MessageCircle, Info } from "lucide-react";
@@ -22,6 +22,11 @@ export default function CheckoutPage() {
     fullName: "", email: "", phone: "", address: "", city: "", postalCode: "", notes: "",
   });
   const [submitting, setSubmitting] = useState(false);
+  const [showDemoTool, setShowDemoTool] = useState(false);
+
+  useEffect(() => {
+    setShowDemoTool(new URLSearchParams(window.location.search).has("demo"));
+  }, []);
 
   const primaryFulfillment = items[0]?.fulfillment ?? "pickup";
   const deliveryFee = 0; // quoted individually — never invented here
@@ -185,7 +190,9 @@ export default function CheckoutPage() {
             </p>
           )}
 
-          {/* Clearly separated demo path — for testing the flow only. */}
+          {/* Test tool. Hidden unless ?demo=1 is in the URL — a customer must
+              never be able to tap this and believe they've ordered. */}
+          {showDemoTool && (
           <div className="rounded-xl border border-dashed border-line p-4 text-center">
             <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-taupe">
               Testing only
@@ -199,6 +206,7 @@ export default function CheckoutPage() {
               Record a demo order
             </button>
           </div>
+          )}
         </div>
       </form>
     </div>

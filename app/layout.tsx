@@ -4,6 +4,7 @@ import "./globals.css";
 import { CartProvider } from "@/lib/cart-context";
 import Header from "@/components/layout/Header";
 import DemoBanner from "@/components/layout/DemoBanner";
+import WhatsappFab from "@/components/layout/WhatsappFab";
 import { FlyToCartProvider } from "@/components/shared/FlyToCart";
 import Footer from "@/components/layout/Footer";
 
@@ -64,6 +65,7 @@ export default function RootLayout({
           <Header />
           <main id="main-content">{children}</main>
           <Footer />
+          <WhatsappFab />
         </FlyToCartProvider>
       </CartProvider>
       </body>

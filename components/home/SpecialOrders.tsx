@@ -1,26 +1,17 @@
 import { MessageCircle } from "lucide-react";
-import { WHATSAPP_SPECIAL_ORDER } from "@/lib/business";
-import Stamp from "@/components/shared/Stamp";
+import { WHATSAPP_SPECIAL_ORDER, BUSINESS } from "@/lib/business";
 import Reveal from "@/components/shared/Reveal";
 
 /**
- * Special orders are handled person to person, never through a cart.
- * The bear is holding the gift box the section is about — his reason for
- * being here is that he's carrying the thing you'd be ordering.
+ * Special orders are arranged person to person over WhatsApp — never through
+ * a cart. The section is kept plain and typographic: an abstract symbol here
+ * said nothing, so the words and the action carry it instead.
  */
 export default function SpecialOrders() {
   return (
     <section className="section bg-milk">
       <div className="container-bx">
-        <Reveal className="relative mx-auto max-w-3xl text-center">
-          <div className="relative mx-auto mb-2 h-40 w-40 sm:h-48 sm:w-48">
-            <Stamp className="h-full w-full text-2xl" />
-            <div
-              aria-hidden="true"
-              className="absolute -bottom-1 left-1/2 h-5 w-2/5 -translate-x-1/2 rounded-[50%] bg-cocoa/[0.07] blur-lg"
-            />
-          </div>
-
+        <Reveal className="mx-auto max-w-2xl text-center">
           <p className="t-eyebrow">Special Orders</p>
           <h2 className="t-heading mt-4">Something special in mind?</h2>
           <p className="t-body mx-auto mt-4 max-w-md">
@@ -37,6 +28,9 @@ export default function SpecialOrders() {
             <MessageCircle size={16} />
             Talk to Our Team
           </a>
+          <p className="t-caption mt-4">
+            Message us on WhatsApp · {BUSINESS.phoneDisplay}
+          </p>
         </Reveal>
       </div>
     </section>
