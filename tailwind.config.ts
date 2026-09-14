@@ -56,6 +56,11 @@ const config: Config = {
       keyframes: {
         breathe: { "0%,100%": { transform: "scale(1)" }, "50%": { transform: "scale(1.018)" } },
         sway: { "0%,100%": { transform: "rotate(-2deg)" }, "50%": { transform: "rotate(2deg)" } },
+        wave: {
+          "0%, 70%, 100%": { transform: "rotate(0deg)" },
+          "80%": { transform: "rotate(-13deg)" },
+          "90%": { transform: "rotate(-6deg)" },
+        },
         driftLight: {
           "0%,100%": { opacity: "0.8", transform: "translate3d(0,0,0)" },
           "50%": { opacity: "1", transform: "translate3d(1.5%,1%,0)" },
@@ -81,6 +86,7 @@ const config: Config = {
       animation: {
         breathe: "breathe 5s ease-in-out infinite",
         sway: "sway 6s ease-in-out infinite",
+        wave: "wave 4.5s ease-in-out infinite",
         driftLight: "driftLight 20s ease-in-out infinite",
         softIn: "softIn 0.8s cubic-bezier(0.22,0.61,0.36,1) forwards",
         popIn: "popIn 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards",

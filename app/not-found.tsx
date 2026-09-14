@@ -1,11 +1,11 @@
 import Link from "next/link";
-import Bear from "@/components/shared/Bear";
+import LayeredBear from "@/components/shared/LayeredBear";
 
 export default function NotFound() {
   return (
     <div className="container-bx flex flex-col items-center gap-4 py-28 text-center">
       <div className="h-32 w-32">
-        <Bear slot="sleeping" priority />
+        <LayeredBear mood="resting" priority look={false} />
       </div>
       <h1 className="text-3xl font-medium">Our teddy dozed off</h1>
       <p className="max-w-sm text-taupe">

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import LazyImage from "@/components/shared/LazyImage";
 import SectionHeading from "@/components/shared/SectionHeading";
-import Bear from "@/components/shared/Bear";
+import LayeredBear from "@/components/shared/LayeredBear";
 
 export const metadata: Metadata = {
   title: "Our Story",
@@ -68,7 +68,7 @@ export default function AboutPage() {
             </p>
           </div>
           <div className="order-1 mx-auto h-56 w-56 md:order-2">
-            <Bear slot="baking" priority />
+            <LayeredBear mood="greet" priority />
           </div>
         </div>
       </section>

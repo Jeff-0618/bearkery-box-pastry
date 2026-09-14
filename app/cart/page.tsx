@@ -5,7 +5,7 @@ import { AnimatePresence } from "framer-motion";
 import { useCart } from "@/lib/cart-context";
 import CartLineItem from "@/components/cart/CartLineItem";
 import OrderSummary from "@/components/cart/OrderSummary";
-import Bear from "@/components/shared/Bear";
+import LayeredBear from "@/components/shared/LayeredBear";
 
 export default function CartPage() {
   const { items, subtotal } = useCart();
@@ -13,8 +13,8 @@ export default function CartPage() {
   if (items.length === 0) {
     return (
       <div className="container-bx flex flex-col items-center gap-4 py-24 text-center">
-        <div className="h-28 w-28">
-          <Bear slot="waiting" priority />
+        <div className="w-32">
+          <LayeredBear mood="resting" priority />
         </div>
         <h1 className="text-2xl font-medium">Your gift basket is waiting to be filled</h1>
         <p className="max-w-sm text-taupe">

@@ -8,7 +8,7 @@ import { Package, MessageCircle, AlertTriangle } from "lucide-react";
 import { Order } from "@/lib/types";
 import { formatPrice, formatReadableDate } from "@/lib/utils";
 import { BUSINESS, ADDRESS_ONE_LINE, WHATSAPP_GENERAL } from "@/lib/business";
-import Bear from "@/components/shared/Bear";
+import LayeredBear from "@/components/shared/LayeredBear";
 import Stamp from "@/components/shared/Stamp";
 
 function ConfirmationContent() {
@@ -44,8 +44,8 @@ function ConfirmationContent() {
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className="mx-auto max-w-2xl text-center"
       >
-        <div className="mx-auto mb-4 h-28 w-28">
-          <Bear slot="thank-you" priority />
+        <div className="mx-auto mb-4 w-32">
+          <LayeredBear mood="happy" priority look={false} />
         </div>
         {/* The order is "sealed" with the shop's own stamp. */}
         <div className="mx-auto -mt-4 mb-2 w-24">
