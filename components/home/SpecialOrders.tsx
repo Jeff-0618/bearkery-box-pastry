@@ -1,6 +1,6 @@
 import { MessageCircle } from "lucide-react";
 import { WHATSAPP_SPECIAL_ORDER } from "@/lib/business";
-import Bear from "@/components/shared/Bear";
+import LayeredBear from "@/components/shared/LayeredBear";
 import Reveal from "@/components/shared/Reveal";
 
 /**
@@ -14,7 +14,7 @@ export default function SpecialOrders() {
       <div className="container-bx">
         <Reveal className="relative mx-auto max-w-3xl text-center">
           <div className="relative mx-auto mb-2 h-40 w-40 sm:h-48 sm:w-48">
-            <Bear slot="gift-box" gaze className="h-full w-full" />
+            <LayeredBear className="h-full w-full" />
             <div
               aria-hidden="true"
               className="absolute -bottom-1 left-1/2 h-5 w-2/5 -translate-x-1/2 rounded-[50%] bg-cocoa/[0.07] blur-lg"

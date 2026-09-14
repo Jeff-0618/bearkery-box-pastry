@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getProductsByCollection, getCollection, getFromPrice } from "@/lib/data";
 import { formatPrice } from "@/lib/utils";
-import Bear from "@/components/shared/Bear";
+import LayeredBear from "@/components/shared/LayeredBear";
 import Reveal from "@/components/shared/Reveal";
 
 /**
@@ -34,10 +34,7 @@ export default function EverydayFavouritesSection() {
           )}
 
           {/* Cropped at the edge: the room continues past the frame. */}
-          <Bear
-            slot="holding-sandwich"
-            className="pointer-events-none absolute -left-24 -bottom-28 hidden h-48 w-48 opacity-95 lg:block"
-          />
+          <LayeredBear className="pointer-events-none absolute -left-28 -bottom-36 hidden w-52 opacity-95 lg:block" />
         </Reveal>
 
         <Reveal delay={0.1}>

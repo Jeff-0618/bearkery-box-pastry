@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Clock } from "lucide-react";
-import Bear from "@/components/shared/Bear";
+import LayeredBear from "@/components/shared/LayeredBear";
 import Stamp from "@/components/shared/Stamp";
 import { Sprig } from "@/components/shared/Atmosphere";
 import { useTimeOfDay } from "@/lib/use-time-of-day";
@@ -104,11 +104,10 @@ export default function Hero() {
             className="absolute bottom-4 left-1/2 h-6 w-2/3 -translate-x-1/2 rounded-[50%] bg-cocoa/[0.09] blur-xl"
           />
           <Sprig className="absolute -left-1 bottom-1 hidden h-24 w-16 sm:block" />
-          <Bear
-            slot="welcome"
+          <LayeredBear
+            mood="greet"
             priority
-            gaze
-            className="relative h-[250px] w-[250px] sm:h-[330px] sm:w-[330px]"
+            className="relative w-[230px] sm:w-[300px]"
           />
           <Stamp className="absolute -right-1 top-2 w-20 text-base sm:w-24" />
         </motion.div>

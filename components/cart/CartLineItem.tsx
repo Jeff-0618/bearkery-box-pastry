@@ -38,7 +38,7 @@ export default function CartLineItem({ item }: { item: CartItem }) {
             {item.fulfillment === "delivery" ? "Delivery" : "Pickup"} · {formatReadableDate(item.deliveryDate)}
           </Badge>
           {item.gift.recipientName && <Badge>For {item.gift.recipientName}</Badge>}
-          {item.gift.isGift && <Badge tone="gold">Gift card added</Badge>}
+          {item.gift.isGift && <Badge tone="peach">Gift card added</Badge>}
         </div>
 
         {item.gift.cakeMessage && (
