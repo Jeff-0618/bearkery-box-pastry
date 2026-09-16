@@ -12,18 +12,21 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        milk: "#FDF6EC",       // page base — warm milk
-        cream: "#F7EADA",      // alternating sections
-        kraft: "#EFDCC4",      // paper bag / receipt tone
-        surface: "#FFFCF7",    // cards, lifted paper
-        cocoa: "#4B3A2F",      // primary text
-        taupe: "#8D7867",      // muted text
-        teddy: "#D2A277",      // primary accent (the bear's own fur)
-        caramel: "#C67F43",    // stronger accent — prices, stamps
-        peach: "#F6DCC6",      // soft fill
-        blush: "#F0CFC6",      // gentle pink touch
-        matcha: "#A9BE9C",     // the single green
-        line: "#E4D2BA",
+        // Driven by CSS variables so the Mid-Autumn theme can repaint the
+        // whole site without touching a single component.
+        milk: "var(--c-milk)",
+        cream: "var(--c-cream)",
+        surface: "var(--c-surface)",
+        cocoa: "var(--c-cocoa)",
+        taupe: "var(--c-taupe)",
+        teddy: "var(--c-teddy)",
+        caramel: "var(--c-caramel)",
+        peach: "var(--c-peach)",
+        line: "var(--c-line)",
+        // Fixed, theme-independent
+        kraft: "#EFDCC4",
+        blush: "#F0CFC6",
+        matcha: "#A9BE9C",
       },
       fontFamily: {
         // Rounded Japanese-friendly display + friendly geometric body
