@@ -3,12 +3,14 @@
 import Link from "next/link";
 import { AnimatePresence } from "framer-motion";
 import { useCart } from "@/lib/cart-context";
+import { useLang } from "@/lib/i18n";
 import CartLineItem from "@/components/cart/CartLineItem";
 import OrderSummary from "@/components/cart/OrderSummary";
 import Bear from "@/components/shared/Bear";
 
 export default function CartPage() {
   const { items, subtotal } = useCart();
+  const { t } = useLang();
 
   if (items.length === 0) {
     return (
@@ -16,12 +18,12 @@ export default function CartPage() {
         <div className="w-36">
           <Bear priority />
         </div>
-        <h1 className="text-2xl font-medium">Your gift basket is waiting to be filled</h1>
+        <h1 className="text-2xl font-medium">{t("cart.empty")}</h1>
         <p className="max-w-sm text-taupe">
-          Nothing in here yet. Have a look at what we&apos;re baking today.
+          {t("cart.emptyBody")}
         </p>
         <Link href="/collections" className="btn-primary mt-2">
-          Shop Collections
+          {t("cart.shop")}
         </Link>
       </div>
     );
@@ -29,7 +31,7 @@ export default function CartPage() {
 
   return (
     <div className="container-bx page">
-      <h1 className="mb-8 text-3xl font-medium">Your Gift Basket</h1>
+      <h1 className="mb-8 text-3xl font-medium">{t("cart.title")}</h1>
       <div className="grid gap-10 lg:grid-cols-[1.6fr_1fr]">
         <div className="paper px-6">
           <AnimatePresence initial={false}>
@@ -43,7 +45,7 @@ export default function CartPage() {
             subtotal={subtotal}
             itemCount={items.reduce((s, i) => s + i.quantity, 0)}
             ctaHref="/checkout"
-            ctaLabel="Prepare My Gift Box"
+            ctaLabel={t("cart.checkout")}
           />
         </div>
       </div>

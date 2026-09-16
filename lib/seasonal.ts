@@ -20,6 +20,11 @@ export interface SeasonalCampaign {
   eyebrow: string;
   heading: string;
   body: string;
+  /** Simplified Chinese versions — shown when the site is in 中文. */
+  eyebrowZh: string;
+  headingZh: string;
+  bodyZh: string;
+  footnoteZh?: string;
   ctaLabel: string;
   /** Message pre-filled into WhatsApp when the button is tapped. */
   ctaMessage: string;
@@ -35,6 +40,11 @@ export const CURRENT: SeasonalCampaign = {
   heading: "Under the same full moon",
   body:
     "Mid-Autumn is a night for being together — and a night that's felt most by the ones who are far from home. If you're gathering people around a table this year, or sending something to a table you can't reach, tell us who it's for and we'll help you put the box together.",
+  eyebrowZh: "中秋 · 9月25日",
+  headingZh: "共着同一轮月亮",
+  bodyZh:
+    "中秋是团圆的日子 — 而这份心意,离家的人感受最深。今年若你要围一桌人,或想寄一份心意到一张你到不了的桌子,告诉我们是为谁准备的,我们陪你一起把这盒装好。",
+  footnoteZh: "节庆礼盒需要个别洽谈 — 接单现做,建议提早预订。",
   ctaLabel: "Plan a Mid-Autumn box",
   ctaMessage:
     "Hi Bearkery Box Pastry! I'd like to ask about a Mid-Autumn gift box.",

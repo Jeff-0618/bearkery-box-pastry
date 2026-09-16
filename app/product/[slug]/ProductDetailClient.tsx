@@ -9,6 +9,7 @@ import { Product } from "@/lib/types";
 import { formatPrice, addDays, toISODate } from "@/lib/utils";
 import { useCart } from "@/lib/cart-context";
 import LazyImage from "@/components/shared/LazyImage";
+import Lightbox from "@/components/shared/Lightbox";
 import VariantSelector from "@/components/product/VariantSelector";
 import QuantitySelector from "@/components/product/QuantitySelector";
 import FulfillmentToggle from "@/components/product/FulfillmentToggle";
@@ -29,6 +30,7 @@ export default function ProductDetailClient({
   const { addItem } = useCart();
 
   const [activeImage, setActiveImage] = useState(0);
+  const [zoomIndex, setZoomIndex] = useState<number | null>(null);
   const [variantId, setVariantId] = useState(product.variants[0].id);
   const [quantity, setQuantity] = useState(1);
   const [fulfillment, setFulfillment] = useState<"delivery" | "pickup">("pickup");
@@ -93,12 +95,19 @@ export default function ProductDetailClient({
       <section className="container-bx grid gap-10 py-8 lg:grid-cols-2">
         {/* Gallery */}
         <div className="relative" ref={galleryRef}>
-          <LazyImage
-            src={product.images[activeImage]}
-            alt={product.name}
-            className="aspect-square w-full rounded-soft shadow-lifted"
-            priority
-          />
+          <button
+            type="button"
+            onClick={() => setZoomIndex(activeImage)}
+            aria-label="View larger photo"
+            className="block w-full cursor-zoom-in"
+          >
+            <LazyImage
+              src={product.images[activeImage]}
+              alt={product.name}
+              className="aspect-square w-full rounded-soft shadow-lifted"
+              priority
+            />
+          </button>
           {product.images.length > 1 && (
             <div className="mt-3 flex gap-2.5">
               {product.images.map((img, i) => (
@@ -216,6 +225,13 @@ export default function ProductDetailClient({
           </div>
         </section>
       )}
+
+      <Lightbox
+        images={product.images}
+        index={zoomIndex}
+        onClose={() => setZoomIndex(null)}
+        onIndexChange={setZoomIndex}
+      />
     </div>
   );
 }

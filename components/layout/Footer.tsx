@@ -1,9 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import { VISIBLE_COLLECTIONS } from "@/lib/data";
 import Image from "next/image";
 import NewsletterForm from "./NewsletterForm";
+import { useLang } from "@/lib/i18n";
 
 export default function Footer() {
+  const { t } = useLang();
   return (
     <footer className="mt-24 border-t border-line bg-cream">
       <div className="container-bx grid gap-12 py-16 md:grid-cols-4">
@@ -18,12 +22,12 @@ export default function Footer() {
             />
           </div>
           <p className="text-sm leading-relaxed text-taupe">
-            Pudding burnt cakes, hand-drawn cakes and morning sandwiches, made fresh in Seri Kembangan.
+            {t("footer.tagline")}
           </p>
         </div>
 
         <div>
-          <p className="label-bx">Collections</p>
+          <p className="label-bx">{t("footer.collections")}</p>
           <ul className="flex flex-col gap-2.5">
             {VISIBLE_COLLECTIONS.slice(0, 5).map((c) => (
               <li key={c.slug}>
@@ -36,11 +40,11 @@ export default function Footer() {
         </div>
 
         <div>
-          <p className="label-bx">Company</p>
+          <p className="label-bx">{t("footer.company")}</p>
           <ul className="flex flex-col gap-2.5">
-            <li><Link href="/about" className="text-sm text-taupe hover:text-teddy">Our Story</Link></li>
-            <li><Link href="/faq" className="text-sm text-taupe hover:text-teddy">FAQ</Link></li>
-            <li><Link href="/contact" className="text-sm text-taupe hover:text-teddy">Contact</Link></li>
+            <li><Link href="/about" className="text-sm text-taupe hover:text-teddy">{t("nav.story")}</Link></li>
+            <li><Link href="/faq" className="text-sm text-taupe hover:text-teddy">{t("nav.faq")}</Link></li>
+            <li><Link href="/contact" className="text-sm text-taupe hover:text-teddy">{t("nav.contact")}</Link></li>
             <li><Link href="/collections" className="text-sm text-taupe hover:text-teddy">All Collections</Link></li>
           </ul>
         </div>
@@ -56,7 +60,7 @@ export default function Footer() {
 
       <div className="border-t border-line py-6">
         <div className="container-bx flex flex-col items-center justify-between gap-3 text-xs text-taupe sm:flex-row">
-          <p>© {new Date().getFullYear()} Bearkery Box Pastry. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Bearkery Box Pastry. {t("footer.rights")}</p>
           <p>Made with warmth, sugar, and a little bit of bear magic.</p>
         </div>
       </div>

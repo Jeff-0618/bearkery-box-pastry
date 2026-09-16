@@ -1,6 +1,9 @@
+"use client";
+
 import { MessageCircle } from "lucide-react";
 import { CURRENT, seasonalCtaLink } from "@/lib/seasonal";
 import Reveal from "@/components/shared/Reveal";
+import { useLang } from "@/lib/i18n";
 
 /**
  * The seasonal block. Content comes entirely from lib/seasonal.ts.
@@ -10,6 +13,8 @@ import Reveal from "@/components/shared/Reveal";
  * which is also what keeps it from dating the site or looking like clip art.
  */
 export default function SeasonalSection() {
+  const { t, lang } = useLang();
+  const zh = lang === "zh";
   if (!CURRENT.active) return null;
 
   return (
@@ -39,13 +44,13 @@ export default function SeasonalSection() {
       <div className="container-bx relative">
         <Reveal className="max-w-xl">
           <p className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-peach">
-            {CURRENT.eyebrow}
+            {zh ? CURRENT.eyebrowZh : CURRENT.eyebrow}
           </p>
           <h2 className="mt-4 font-display text-3xl text-milk sm:text-4xl">
-            {CURRENT.heading}
+            {zh ? CURRENT.headingZh : CURRENT.heading}
           </h2>
           <p className="mt-5 text-[0.95rem] leading-[1.8] text-milk/75">
-            {CURRENT.body}
+            {zh ? CURRENT.bodyZh : CURRENT.body}
           </p>
 
           <a
@@ -55,11 +60,11 @@ export default function SeasonalSection() {
             className="btn mt-8 bg-peach text-cocoa hover:bg-milk"
           >
             <MessageCircle size={16} />
-            {CURRENT.ctaLabel}
+            {t("season.cta")}
           </a>
 
           {CURRENT.footnote && (
-            <p className="mt-4 text-xs text-milk/50">{CURRENT.footnote}</p>
+            <p className="mt-4 text-xs text-milk/50">{zh ? CURRENT.footnoteZh : CURRENT.footnote}</p>
           )}
         </Reveal>
       </div>

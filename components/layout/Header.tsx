@@ -2,24 +2,41 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ShoppingBag } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
 import { VISIBLE_COLLECTIONS } from "@/lib/data";
+import { useLang } from "@/lib/i18n";
+import LanguageToggle from "./LanguageToggle";
+import ThemeToggle from "./ThemeToggle";
 
 const NAV_LINKS = [
-  { href: "/collections", label: "Collections" },
-  { href: "/about", label: "Our Story" },
-  { href: "/faq", label: "FAQ" },
-  { href: "/contact", label: "Contact" },
+  { href: "/collections", key: "nav.collections" },
+  { href: "/about", key: "nav.story" },
+  { href: "/faq", key: "nav.faq" },
+  { href: "/contact", key: "nav.contact" },
 ];
 
 export default function Header() {
   const [open, setOpen] = useState(false);
   const { count } = useCart();
+  const { t } = useLang();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
+
+  // Stop the page behind the drawer from scrolling while it's open.
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
   return (
+    <>
     <header className="sticky top-0 z-50 border-b border-line bg-milk/85 backdrop-blur-md">
       <div className="container-bx flex h-20 items-center justify-between">
         <Link href="/" className="flex items-center gap-2.5" aria-label="Bearkery Box Pastry home">
@@ -43,16 +60,18 @@ export default function Header() {
               href={link.href}
               className="text-sm font-medium text-cocoa transition hover:text-teddy"
             >
-              {link.label}
+              {t(link.key)}
             </Link>
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <ThemeToggle className="hidden sm:flex" />
+          <LanguageToggle />
           <Link
             href="/cart"
             className="relative flex h-11 w-11 items-center justify-center rounded-full border border-line text-cocoa transition hover:bg-cream"
-            aria-label={`Gift basket, ${count} item${count === 1 ? "" : "s"}`}
+            aria-label={`${t("nav.cart")} (${count})`}
           >
             <ShoppingBag size={18} strokeWidth={1.75} />
             {count > 0 && (
@@ -70,14 +89,18 @@ export default function Header() {
           </button>
         </div>
       </div>
+    </header>
 
-      <AnimatePresence>
+    {/* Rendered outside <header> on purpose — see note above. */}
+    {mounted &&
+      createPortal(
+        <AnimatePresence>
         {open && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[60] bg-cocoa/40 md:hidden"
+            className="fixed inset-0 z-[100] bg-cocoa/50 md:hidden"
             onClick={() => setOpen(false)}
           >
             <motion.div
@@ -89,7 +112,7 @@ export default function Header() {
               onClick={(e) => e.stopPropagation()}
             >
               <div className="mb-8 flex items-center justify-between">
-                <span className="font-display text-lg font-semibold">Menu</span>
+                <span className="font-display text-lg font-semibold">{t("nav.menu")}</span>
                 <button
                   onClick={() => setOpen(false)}
                   aria-label="Close menu"
@@ -106,12 +129,12 @@ export default function Header() {
                     onClick={() => setOpen(false)}
                     className="text-base font-medium text-cocoa"
                   >
-                    {link.label}
+                    {t(link.key)}
                   </Link>
                 ))}
               </nav>
               <div className="mt-8 border-t border-line pt-6">
-                <p className="label-bx">Shop by collection</p>
+                <p className="label-bx">{t("nav.shopByCollection")}</p>
                 <div className="flex flex-col gap-3">
                   {VISIBLE_COLLECTIONS.slice(0, 4).map((c) => (
                     <Link
@@ -128,8 +151,10 @@ export default function Header() {
             </motion.div>
           </motion.div>
         )}
-      </AnimatePresence>
-    </header>
+        </AnimatePresence>,
+        document.body
+      )}
+    </>
   );
 }
 

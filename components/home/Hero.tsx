@@ -6,6 +6,7 @@ import { Clock } from "lucide-react";
 import Bear from "@/components/shared/Bear";
 import { useTimeOfDay } from "@/lib/use-time-of-day";
 import { cx } from "@/lib/utils";
+import { useLang } from "@/lib/i18n";
 
 const EASE = [0.22, 0.61, 0.36, 1] as const;
 
@@ -16,6 +17,7 @@ const EASE = [0.22, 0.61, 0.36, 1] as const;
  */
 export default function Hero() {
   const time = useTimeOfDay();
+  const { t } = useLang();
 
   return (
     <section className="relative overflow-hidden bg-milk">
@@ -33,10 +35,10 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: EASE }}
           >
-            <span className={cx("t-eyebrow transition-opacity duration-500", time.ready ? "opacity-100" : "opacity-0")}>{time.greeting}</span>
+            <span className={cx("t-eyebrow transition-opacity duration-500", time.ready ? "opacity-100" : "opacity-0")}>{t(`hero.greeting${time.part.charAt(0).toUpperCase()}${time.part.slice(1)}`)}</span>
             <span className="h-1 w-1 rounded-full bg-caramel/40" />
             <span className="t-eyebrow font-normal normal-case tracking-normal text-taupe">
-              Seri Kembangan
+              {t("hero.location")}
             </span>
           </motion.div>
 
@@ -46,9 +48,9 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.1, ease: EASE }}
           >
-            Baked for
+            {t("hero.title1")}
             <br />
-            little moments.
+            {t("hero.title2")}
           </motion.h1>
 
           <motion.p
@@ -57,7 +59,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.2, ease: EASE }}
           >
-            {time.line}
+            {t(`hero.line${time.part.charAt(0).toUpperCase()}${time.part.slice(1)}`)}
           </motion.p>
 
           <motion.div
@@ -68,15 +70,15 @@ export default function Hero() {
           >
             {time.sandwichWindowOpen ? (
               <Link href="/collections/everyday-favourites" className="btn-primary">
-                Today&apos;s Sandwiches
+                {t("hero.ctaSandwiches")}
               </Link>
             ) : (
               <Link href="/product/pudding-burnt-cake" className="btn-primary">
-                Our Pudding Burnt Cake
+                {t("hero.ctaCake")}
               </Link>
             )}
             <Link href="/about" className="btn-ghost">
-              Our Story
+              {t("hero.ctaStory")}
             </Link>
           </motion.div>
 
@@ -87,7 +89,7 @@ export default function Hero() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
             >
-              <Clock size={13} /> Collection 7:00 – 11:00 AM
+              <Clock size={13} /> {t("hero.collection")}
             </motion.p>
           )}
         </div>

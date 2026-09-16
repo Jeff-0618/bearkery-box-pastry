@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Zen_Maru_Gothic, Poppins } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/lib/cart-context";
+import { LanguageProvider } from "@/lib/i18n";
+import { ThemeProvider } from "@/lib/theme";
 import Header from "@/components/layout/Header";
 import DemoBanner from "@/components/layout/DemoBanner";
 import WhatsappFab from "@/components/layout/WhatsappFab";
@@ -54,6 +56,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${zen.variable} ${poppins.variable}`}>
       <body>
+        <ThemeProvider>
+        <LanguageProvider>
         <CartProvider>
         <FlyToCartProvider>
           <a
@@ -69,6 +73,8 @@ export default function RootLayout({
           <WhatsappFab />
         </FlyToCartProvider>
       </CartProvider>
+        </LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

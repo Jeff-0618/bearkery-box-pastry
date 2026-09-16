@@ -1,8 +1,11 @@
+"use client";
+
 import Link from "next/link";
 import { getProduct } from "@/lib/data";
 import { formatPrice } from "@/lib/utils";
 import LazyImage from "@/components/shared/LazyImage";
 import Reveal from "@/components/shared/Reveal";
+import { useLang } from "@/lib/i18n";
 
 /**
  * The signature product. The bear stands slightly behind and below the
@@ -10,6 +13,7 @@ import Reveal from "@/components/shared/Reveal";
  * eye to the product rather than to himself.
  */
 export default function SignatureProduct() {
+  const { t } = useLang();
   const product = getProduct("pudding-burnt-cake");
   if (!product) return null;
 
@@ -32,10 +36,10 @@ export default function SignatureProduct() {
         </Reveal>
 
         <Reveal delay={0.1}>
-          <p className="t-eyebrow">Our Signature</p>
+          <p className="t-eyebrow">{t("sig.eyebrow")}</p>
           <h2 className="t-heading mt-4">{product.name}</h2>
           <p className="t-body mt-4 max-w-md">
-            Our little favourite, baked fresh for your sweetest moments.
+            {t("sig.tagline")}
           </p>
 
           <ul className="mt-8 flex flex-col">
@@ -51,7 +55,7 @@ export default function SignatureProduct() {
           </ul>
 
           <Link href={`/product/${product.slug}`} className="btn-primary mt-8">
-            Explore Pudding Cakes
+            {t("sig.cta")}
           </Link>
         </Reveal>
       </div>

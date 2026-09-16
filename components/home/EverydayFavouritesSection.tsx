@@ -1,7 +1,10 @@
+"use client";
+
 import Link from "next/link";
 import { getProductsByCollection, getCollection, getFromPrice } from "@/lib/data";
 import { formatPrice } from "@/lib/utils";
 import Reveal from "@/components/shared/Reveal";
+import { useLang } from "@/lib/i18n";
 
 /**
  * Morning sandwiches. The bear is at the left edge and partially cropped by
@@ -10,6 +13,7 @@ import Reveal from "@/components/shared/Reveal";
  * cleanly.
  */
 export default function EverydayFavouritesSection() {
+  const { t } = useLang();
   const collection = getCollection("everyday-favourites");
   const products = getProductsByCollection("everyday-favourites");
   if (!collection) return null;
@@ -18,13 +22,12 @@ export default function EverydayFavouritesSection() {
     <section className="section relative overflow-hidden bg-milk">
       <div className="container-bx grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
         <Reveal className="relative">
-          <p className="t-eyebrow">Everyday Favourites</p>
+          <p className="t-eyebrow">{t("ef.eyebrow")}</p>
           <h2 className="t-heading mt-4 max-w-[14ch]">
-            Something for every morning
+            {t("ef.heading")}
           </h2>
           <p className="t-body mt-4 max-w-sm">
-            Fresh little favourites for your everyday mornings, hand-packed
-            before the day begins.
+            {t("ef.body")}
           </p>
           {collection.pickupNote && (
             <p className="mt-5 inline-flex rounded-pill bg-peach px-4 py-2 text-xs font-semibold text-cocoa">

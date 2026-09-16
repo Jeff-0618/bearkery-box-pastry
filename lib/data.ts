@@ -63,6 +63,12 @@ export const PRODUCTS: Product[] = [
       "/products/pudding-burnt-cake.jpg",
       "/products/pbc-group.jpg",
       "/products/pbc-flavours.jpg",
+      "/products/pbc-cut-4.jpg",
+      "/products/pbc-cut-van-choc.jpg",
+      "/products/pbc-cut-matcha.jpg",
+      "/products/pbc-vanilla.jpg",
+      "/products/pbc-chocolate.jpg",
+      "/products/pbc-matcha.jpg",
     ],
     variants: [
       { id: "vanilla", label: "Vanilla", price: 7 },
@@ -84,7 +90,7 @@ export const PRODUCTS: Product[] = [
     shortDescription: "Our signature bake, sized to share.",
     description:
       "The same burnt caramel top, silky pudding and soft cake base — baked at 6 inch, sized for sharing.",
-    images: ["/products/pbc-group.jpg", "/products/pudding-burnt-cake.jpg"],
+    images: ["/products/pbc-group.jpg", "/products/pudding-burnt-cake.jpg", "/products/pbc-stack.jpg", "/products/pbc-cut-plain.jpg"],
     variants: [
       { id: "vanilla-6", label: "Vanilla", price: 55 },
       { id: "chocolate-6", label: "Chocolate", price: 55 },
@@ -106,7 +112,7 @@ export const PRODUCTS: Product[] = [
     shortDescription: "Our fullest sandwich — ham, burger meat, egg mayo and more.",
     description:
       "Our fullest sandwich, hand-packed fresh every morning. Ready for pickup between 7:00 AM and 11:00 AM, while supplies last.",
-    images: ["/products/signature-sandwich.jpg"],
+    images: ["/products/signature-sandwich.jpg", "/products/poster-signature.jpg"],
     variants: [{ id: "reg", label: "Regular", price: 6 }],
     preorderDays: 1,
     ingredients: ["Ham", "Burger Meat", "Egg Mayo", "Salad", "Tomato", "Mayonnaise"],
@@ -138,7 +144,7 @@ export const PRODUCTS: Product[] = [
     shortDescription: "Simple and classic — ham with egg mayo.",
     description:
       "A simple classic: ham layered with egg mayo, hand-packed fresh every morning. Ready for pickup between 7:00 AM and 11:00 AM, while supplies last.",
-    images: ["/products/egg-ham-sandwich.jpg"],
+    images: ["/products/egg-ham-sandwich.jpg", "/products/poster-egg-ham.jpg"],
     variants: [{ id: "reg", label: "Regular", price: 5 }],
     preorderDays: 1,
     ingredients: ["Ham", "Egg Mayo"],
@@ -154,7 +160,7 @@ export const PRODUCTS: Product[] = [
     shortDescription: "Salad, tomato and egg mayo.",
     description:
       "A lighter option with salad, tomato and egg mayo, hand-packed fresh every morning. Ready for pickup between 7:00 AM and 11:00 AM, while supplies last.",
-    images: ["/products/vege-sandwich.jpg"],
+    images: ["/products/vege-sandwich.jpg", "/products/poster-vege.jpg"],
     variants: [{ id: "reg", label: "Regular", price: 4.5 }],
     preorderDays: 1,
     ingredients: ["Salad", "Tomato", "Egg Mayo"],
@@ -197,6 +203,8 @@ export const PRODUCTS: Product[] = [
       "/products/handdrawn-birthday.jpg",
       "/products/handdrawn-layers-1.jpg",
       "/products/handdrawn-family.jpg",
+      "/products/handdrawn-couple.jpg",
+      "/products/handdrawn-singing.jpg",
     ],
     variants: [
       { id: "vanilla-6", label: "Vanilla", price: 65 },

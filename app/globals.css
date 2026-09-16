@@ -2,16 +2,50 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ---------------------------------------------------------------------------
+   THEME TOKENS
+
+   Colours are declared as CSS variables so the whole site can switch between
+   the everyday look and the Mid-Autumn night without any component knowing.
+   Tailwind classes below map onto these variables.
+   --------------------------------------------------------------------------- */
+:root {
+  --c-milk:    #FDF6EC;
+  --c-cream:   #F7EADA;
+  --c-surface: #FFFCF7;
+  --c-cocoa:   #4B3A2F;
+  --c-taupe:   #8D7867;
+  --c-teddy:   #D2A277;
+  --c-caramel: #C67F43;
+  --c-peach:   #F6DCC6;
+  --c-line:    #E4D2BA;
+}
+
+/* Mid-Autumn: a warm night rather than a cold one — lamplight, not moonless
+   black. Text goes light, surfaces go deep brown, gold carries the accents. */
+:root[data-theme="festive"] {
+  --c-milk:    #2A211B;
+  --c-cream:   #352A22;
+  --c-surface: #3B2E25;
+  --c-cocoa:   #F6E7D2;
+  --c-taupe:   #C3AC93;
+  --c-teddy:   #E7BE86;
+  --c-caramel: #F0C98A;
+  --c-peach:   #5A4531;
+  --c-line:    #4E3D31;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
-    /* Never allow sideways scroll on narrow screens. */
-    overflow-x: hidden;
+    /* Prevent sideways scroll. `clip` (not `hidden`) — `hidden` creates a
+       scroll container and breaks `position: fixed` descendants. */
+    overflow-x: clip;
   }
   body {
     @apply bg-milk text-cocoa font-body antialiased;
+    transition: background-color 700ms ease, color 700ms ease;
     line-height: 1.7;
-    overflow-x: hidden;
     /* Leave room for the floating WhatsApp button so it never sits on top
        of the last line of content. */
     padding-bottom: env(safe-area-inset-bottom);

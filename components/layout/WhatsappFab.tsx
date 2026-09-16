@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { MessageCircle } from "lucide-react";
 import { WHATSAPP_GENERAL } from "@/lib/business";
 import { cx } from "@/lib/utils";
+import { useLang } from "@/lib/i18n";
 
 /**
  * A persistent WhatsApp button.
@@ -18,6 +19,7 @@ import { cx } from "@/lib/utils";
  */
 export default function WhatsappFab() {
   const [shown, setShown] = useState(false);
+  const { t } = useLang();
 
   useEffect(() => {
     const onScroll = () => setShown(window.scrollY > 320);
@@ -31,7 +33,7 @@ export default function WhatsappFab() {
       href={WHATSAPP_GENERAL}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Order on WhatsApp"
+      aria-label={t("fab.order")}
       style={{ bottom: "calc(1rem + env(safe-area-inset-bottom))" }}
       className={cx(
         "fixed right-4 z-[80] flex items-center gap-2 rounded-pill bg-[#25D366] px-4 py-3 sm:right-5 sm:px-5 sm:py-3.5",
@@ -41,8 +43,8 @@ export default function WhatsappFab() {
       )}
     >
       <MessageCircle size={18} strokeWidth={2.2} />
-      <span className="hidden sm:inline">Order on WhatsApp</span>
-      <span className="sm:hidden">Order</span>
+      <span className="hidden sm:inline">{t("fab.order")}</span>
+      <span className="sm:hidden">{t("fab.orderShort")}</span>
     </a>
   );
 }

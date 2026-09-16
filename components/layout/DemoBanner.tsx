@@ -1,6 +1,9 @@
+"use client";
+
 import { MessageCircle } from "lucide-react";
 import { IS_DEMO } from "@/lib/payment";
 import { WHATSAPP_GENERAL, BUSINESS } from "@/lib/business";
+import { useLang } from "@/lib/i18n";
 
 /**
  * Until online payment is live, every order is placed over WhatsApp.
@@ -11,12 +14,13 @@ import { WHATSAPP_GENERAL, BUSINESS } from "@/lib/business";
  * paid, and then finds no cake waiting, is the worst outcome.
  */
 export default function DemoBanner() {
+  const { t } = useLang();
   if (!IS_DEMO) return null;
 
   return (
     <div className="border-b border-line bg-peach/70">
       <div className="container-bx flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 py-2 text-center text-xs text-cocoa">
-        <span>Orders are confirmed over WhatsApp — no payment is taken on this site.</span>
+        <span>{t("banner.notice")}</span>
         <a
           href={WHATSAPP_GENERAL}
           target="_blank"
