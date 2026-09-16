@@ -14,15 +14,15 @@ const config: Config = {
       colors: {
         // Driven by CSS variables so the Mid-Autumn theme can repaint the
         // whole site without touching a single component.
-        milk: "var(--c-milk)",
-        cream: "var(--c-cream)",
-        surface: "var(--c-surface)",
-        cocoa: "var(--c-cocoa)",
-        taupe: "var(--c-taupe)",
-        teddy: "var(--c-teddy)",
-        caramel: "var(--c-caramel)",
-        peach: "var(--c-peach)",
-        line: "var(--c-line)",
+        milk: "rgb(var(--c-milk) / <alpha-value>)",
+        cream: "rgb(var(--c-cream) / <alpha-value>)",
+        surface: "rgb(var(--c-surface) / <alpha-value>)",
+        cocoa: "rgb(var(--c-cocoa) / <alpha-value>)",
+        taupe: "rgb(var(--c-taupe) / <alpha-value>)",
+        teddy: "rgb(var(--c-teddy) / <alpha-value>)",
+        caramel: "rgb(var(--c-caramel) / <alpha-value>)",
+        peach: "rgb(var(--c-peach) / <alpha-value>)",
+        line: "rgb(var(--c-line) / <alpha-value>)",
         // Fixed, theme-independent
         kraft: "#EFDCC4",
         blush: "#F0CFC6",
@@ -40,17 +40,14 @@ const config: Config = {
       },
       boxShadow: {
         // Paper resting on a table, not a UI card
-        paper: "0 1px 2px rgba(75,58,47,0.05), 0 8px 24px -12px rgba(75,58,47,0.18)",
-        lifted: "0 4px 10px -4px rgba(75,58,47,0.10), 0 20px 44px -20px rgba(75,58,47,0.26)",
-        stamp: "0 2px 0 rgba(198,127,67,0.25)",
+        paper: "0 1px 2px rgb(var(--c-shadow) / 0.05), 0 8px 24px -12px rgb(var(--c-shadow) / 0.18)",
+        lifted: "0 4px 10px -4px rgb(var(--c-shadow) / 0.10), 0 20px 44px -20px rgb(var(--c-shadow) / 0.26)",
+        stamp: "0 2px 0 rgb(var(--c-caramel) / 0.25)",
       },
       backgroundImage: {
-        sunlight:
-          "radial-gradient(130% 100% at 50% -20%, rgba(255,249,238,0.98) 0%, rgba(253,246,236,0) 62%)",
-        dusk:
-          "radial-gradient(130% 100% at 50% -20%, rgba(255,238,214,0.98) 0%, rgba(253,246,236,0) 62%)",
-        night:
-          "radial-gradient(130% 100% at 50% -20%, rgba(247,231,209,0.95) 0%, rgba(250,240,228,0) 62%)",
+        sunlight: "var(--grad-hero)",
+        dusk: "var(--grad-hero)",
+        night: "var(--grad-hero)",
       },
       transitionTimingFunction: {
         gentle: "cubic-bezier(0.22, 0.61, 0.36, 1)",
