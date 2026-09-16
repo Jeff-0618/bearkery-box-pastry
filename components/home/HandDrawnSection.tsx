@@ -5,7 +5,7 @@ import { getProductsByCollection, getFromPrice } from "@/lib/data";
 import { formatPrice } from "@/lib/utils";
 import LazyImage from "@/components/shared/LazyImage";
 import Reveal from "@/components/shared/Reveal";
-import { useLang } from "@/lib/i18n";
+import { useLang } from "@/lib/language";
 
 /**
  * Hand-drawn cakes. The drawing is the product, so the photographs lead and

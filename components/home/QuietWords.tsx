@@ -1,7 +1,7 @@
 "use client";
 
 import Reveal from "@/components/shared/Reveal";
-import { useLang } from "@/lib/i18n";
+import { useLang } from "@/lib/language";
 
 /**
  * Replaces the old three-card testimonial grid — that pattern reads as a

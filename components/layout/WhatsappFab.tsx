@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { MessageCircle } from "lucide-react";
 import { WHATSAPP_GENERAL } from "@/lib/business";
 import { cx } from "@/lib/utils";
-import { useLang } from "@/lib/i18n";
+import { useLang } from "@/lib/language";
 
 /**
  * A persistent WhatsApp button.

@@ -3,7 +3,7 @@
 import { MapPin, Clock, Phone, Navigation, MessageCircle } from "lucide-react";
 import { BUSINESS, MAPS_URL, WHATSAPP_GENERAL } from "@/lib/business";
 import Reveal from "@/components/shared/Reveal";
-import { useLang } from "@/lib/i18n";
+import { useLang } from "@/lib/language";
 
 /**
  * Pickup details. Deliberately plain and high-contrast: this is the block

@@ -2,7 +2,7 @@
 
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "@/lib/theme";
-import { useLang } from "@/lib/i18n";
+import { useLang } from "@/lib/language";
 import { cx } from "@/lib/utils";
 
 /**
@@ -33,7 +33,7 @@ export default function ThemeToggle({ className }: { className?: string }) {
       title={label}
       aria-label={label}
       className={cx(
-        "flex h-11 w-11 items-center justify-center rounded-full border border-line text-cocoa transition-colors duration-300 hover:bg-peach",
+        "flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line text-cocoa transition-colors duration-300 hover:bg-peach sm:h-11 sm:w-11",
         className
       )}
     >

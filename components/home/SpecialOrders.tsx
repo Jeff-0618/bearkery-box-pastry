@@ -3,7 +3,7 @@
 import { MessageCircle } from "lucide-react";
 import { whatsappLink, BUSINESS } from "@/lib/business";
 import Reveal from "@/components/shared/Reveal";
-import { useLang } from "@/lib/i18n";
+import { useLang } from "@/lib/language";
 
 /**
  * Special orders.

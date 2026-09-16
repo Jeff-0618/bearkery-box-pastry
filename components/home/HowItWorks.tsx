@@ -2,7 +2,7 @@
 
 import { Search, Sparkles, CalendarHeart, Gift } from "lucide-react";
 import Reveal from "@/components/shared/Reveal";
-import { useLang } from "@/lib/i18n";
+import { useLang } from "@/lib/language";
 
 /**
  * How to order. No bear: this is instructional content, and the mascot here

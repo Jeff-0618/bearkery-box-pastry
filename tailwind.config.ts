@@ -56,6 +56,10 @@ const config: Config = {
       keyframes: {
         breathe: { "0%,100%": { transform: "scale(1)" }, "50%": { transform: "scale(1.018)" } },
         sway: { "0%,100%": { transform: "rotate(-2deg)" }, "50%": { transform: "rotate(2deg)" } },
+        lanternSway: {
+          "0%, 100%": { transform: "rotate(-3.5deg)" },
+          "50%": { transform: "rotate(3.5deg)" },
+        },
         wave: {
           "0%, 70%, 100%": { transform: "rotate(0deg)" },
           "80%": { transform: "rotate(-13deg)" },
@@ -87,6 +91,7 @@ const config: Config = {
         breathe: "breathe 5s ease-in-out infinite",
         sway: "sway 6s ease-in-out infinite",
         wave: "wave 4.5s ease-in-out infinite",
+        lanternSway: "lanternSway 8s ease-in-out infinite",
         driftLight: "driftLight 20s ease-in-out infinite",
         softIn: "softIn 0.8s cubic-bezier(0.22,0.61,0.36,1) forwards",
         popIn: "popIn 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards",

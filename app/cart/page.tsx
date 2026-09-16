@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { AnimatePresence } from "framer-motion";
 import { useCart } from "@/lib/cart-context";
-import { useLang } from "@/lib/i18n";
+import { useLang } from "@/lib/language";
 import CartLineItem from "@/components/cart/CartLineItem";
 import OrderSummary from "@/components/cart/OrderSummary";
 import Bear from "@/components/shared/Bear";

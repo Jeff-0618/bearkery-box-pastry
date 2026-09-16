@@ -1,6 +1,6 @@
 "use client";
 
-import { useLang } from "@/lib/i18n";
+import { useLang } from "@/lib/language";
 import { cx } from "@/lib/utils";
 
 /**
@@ -16,7 +16,7 @@ export default function LanguageToggle({ className }: { className?: string }) {
   return (
     <div
       className={cx(
-        "flex items-center rounded-pill border border-line bg-surface p-0.5",
+        "flex shrink-0 items-center rounded-pill border border-line bg-surface p-0.5",
         className
       )}
       role="group"
@@ -27,7 +27,7 @@ export default function LanguageToggle({ className }: { className?: string }) {
         onClick={() => setLang("en")}
         aria-pressed={lang === "en"}
         className={cx(
-          "rounded-pill px-2.5 py-1.5 text-xs font-semibold transition-colors duration-300",
+          "rounded-pill px-2 py-1.5 text-[0.7rem] font-semibold transition-colors duration-300 sm:px-2.5 sm:text-xs",
           lang === "en" ? "bg-cocoa text-milk" : "text-taupe hover:text-cocoa"
         )}
       >
@@ -38,7 +38,7 @@ export default function LanguageToggle({ className }: { className?: string }) {
         onClick={() => setLang("zh")}
         aria-pressed={lang === "zh"}
         className={cx(
-          "rounded-pill px-2.5 py-1.5 text-xs font-semibold transition-colors duration-300",
+          "rounded-pill px-2 py-1.5 text-[0.7rem] font-semibold transition-colors duration-300 sm:px-2.5 sm:text-xs",
           lang === "zh" ? "bg-cocoa text-milk" : "text-taupe hover:text-cocoa"
         )}
       >

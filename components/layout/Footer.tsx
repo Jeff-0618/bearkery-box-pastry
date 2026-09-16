@@ -4,7 +4,7 @@ import Link from "next/link";
 import { VISIBLE_COLLECTIONS } from "@/lib/data";
 import Image from "next/image";
 import NewsletterForm from "./NewsletterForm";
-import { useLang } from "@/lib/i18n";
+import { useLang } from "@/lib/language";
 
 export default function Footer() {
   const { t } = useLang();

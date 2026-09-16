@@ -3,7 +3,7 @@
 import { MessageCircle } from "lucide-react";
 import { IS_DEMO } from "@/lib/payment";
 import { WHATSAPP_GENERAL, BUSINESS } from "@/lib/business";
-import { useLang } from "@/lib/i18n";
+import { useLang } from "@/lib/language";
 
 /**
  * Until online payment is live, every order is placed over WhatsApp.

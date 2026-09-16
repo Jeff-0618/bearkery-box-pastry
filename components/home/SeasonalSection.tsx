@@ -3,7 +3,7 @@
 import { MessageCircle } from "lucide-react";
 import { CURRENT, seasonalCtaLink } from "@/lib/seasonal";
 import Reveal from "@/components/shared/Reveal";
-import { useLang } from "@/lib/i18n";
+import { useLang } from "@/lib/language";
 
 /**
  * The seasonal block. Content comes entirely from lib/seasonal.ts.

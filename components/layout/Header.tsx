@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ShoppingBag } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
 import { VISIBLE_COLLECTIONS } from "@/lib/data";
-import { useLang } from "@/lib/i18n";
+import { useLang } from "@/lib/language";
 import LanguageToggle from "./LanguageToggle";
 import ThemeToggle from "./ThemeToggle";
 
@@ -66,7 +66,7 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          <ThemeToggle className="hidden sm:flex" />
+          <ThemeToggle />
           <LanguageToggle />
           <Link
             href="/cart"

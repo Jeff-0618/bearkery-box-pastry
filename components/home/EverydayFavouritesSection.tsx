@@ -4,7 +4,7 @@ import Link from "next/link";
 import { getProductsByCollection, getCollection, getFromPrice } from "@/lib/data";
 import { formatPrice } from "@/lib/utils";
 import Reveal from "@/components/shared/Reveal";
-import { useLang } from "@/lib/i18n";
+import { useLang } from "@/lib/language";
 
 /**
  * Morning sandwiches. The bear is at the left edge and partially cropped by

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Zen_Maru_Gothic, Poppins } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/lib/cart-context";
-import { LanguageProvider } from "@/lib/i18n";
+import { LanguageProvider } from "@/lib/language";
 import { ThemeProvider } from "@/lib/theme";
 import Header from "@/components/layout/Header";
 import DemoBanner from "@/components/layout/DemoBanner";

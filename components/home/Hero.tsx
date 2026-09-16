@@ -4,9 +4,10 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Clock } from "lucide-react";
 import Bear from "@/components/shared/Bear";
+import Lanterns from "@/components/shared/Lanterns";
 import { useTimeOfDay } from "@/lib/use-time-of-day";
 import { cx } from "@/lib/utils";
-import { useLang } from "@/lib/i18n";
+import { useLang } from "@/lib/language";
 
 const EASE = [0.22, 0.61, 0.36, 1] as const;
 
@@ -27,7 +28,9 @@ export default function Hero() {
         className={`pointer-events-none absolute inset-0 ${time.light} animate-driftLight transition-all duration-[2000ms]`}
       />
 
-      <div className="container-bx relative grid items-center gap-10 pb-16 pt-12 sm:pt-16 md:grid-cols-[1.05fr_0.95fr] md:pb-24">
+      <Lanterns />
+
+      <div className="container-bx relative z-10 grid items-center gap-10 pb-16 pt-12 sm:pt-16 md:grid-cols-[1.05fr_0.95fr] md:pb-24">
         <div>
           <motion.div
             className="flex items-center gap-2"
