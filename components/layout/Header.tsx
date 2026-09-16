@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ShoppingBag } from "lucide-react";
@@ -22,7 +23,14 @@ export default function Header() {
     <header className="sticky top-0 z-50 border-b border-line bg-milk/85 backdrop-blur-md">
       <div className="container-bx flex h-20 items-center justify-between">
         <Link href="/" className="flex items-center gap-2.5" aria-label="Bearkery Box Pastry home">
-          <BearMark />
+          <Image
+            src="/logo-mark.png"
+            alt=""
+            width={40}
+            height={31}
+            priority
+            className="h-8 w-auto"
+          />
           <span className="font-display text-xl font-semibold tracking-tight text-cocoa">
             Bearkery <span className="italic text-teddy">Box</span>
           </span>
@@ -127,24 +135,12 @@ export default function Header() {
 
 export function BearMark({ className = "" }: { className?: string }) {
   return (
-    <svg
-      viewBox="0 0 40 40"
-      className={`h-8 w-8 ${className}`}
-      fill="none"
-      aria-hidden="true"
-    >
-      <circle cx="20" cy="22" r="13" fill="#C49A6C" />
-      <circle cx="9" cy="9" r="5.5" fill="#C49A6C" />
-      <circle cx="31" cy="9" r="5.5" fill="#C49A6C" />
-      <circle cx="20" cy="24" r="7.2" fill="#FFF9F4" />
-      <circle cx="16.6" cy="23" r="1.15" fill="#5A4433" />
-      <circle cx="23.4" cy="23" r="1.15" fill="#5A4433" />
-      <path
-        d="M18.5 26.2c.6.9 2.4.9 3 0"
-        stroke="#5A4433"
-        strokeWidth="1"
-        strokeLinecap="round"
-      />
-    </svg>
+    <Image
+      src="/logo-mark.png"
+      alt=""
+      width={40}
+      height={31}
+      className={`h-8 w-auto ${className}`}
+    />
   );
 }

@@ -207,7 +207,7 @@ export default function ProductDetailClient({
       </section>
 
       {related.length > 0 && (
-        <section className="container-bx py-16">
+        <section className="container-bx section">
           <h2 className="mb-6 text-2xl font-medium">You may also love</h2>
           <div className="grid grid-cols-2 gap-5 sm:gap-6 md:grid-cols-4">
             {related.map((p, i) => (

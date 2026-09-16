@@ -45,7 +45,7 @@ const FAQS = [
 
 export default function FaqPage() {
   return (
-    <div className="container-bx py-16">
+    <div className="container-bx page">
       <SectionHeading
         t-eyebrow="Good to know"
         title="Frequently asked questions"

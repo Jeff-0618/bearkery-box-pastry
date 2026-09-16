@@ -3,10 +3,28 @@
 @tailwind utilities;
 
 @layer base {
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    /* Never allow sideways scroll on narrow screens. */
+    overflow-x: hidden;
+  }
   body {
     @apply bg-milk text-cocoa font-body antialiased;
     line-height: 1.7;
+    overflow-x: hidden;
+    /* Leave room for the floating WhatsApp button so it never sits on top
+       of the last line of content. */
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Long words (emails, URLs) must wrap rather than widen the page. */
+  p, h1, h2, h3, h4, li, a, span {
+    overflow-wrap: break-word;
+  }
+
+  /* Images are responsive by default — a stray fixed width can't break out. */
+  img, svg, video {
+    max-width: 100%;
   }
   h1,h2,h3,h4 { @apply font-display text-cocoa; line-height: 1.35; font-weight: 500; }
   ::selection { @apply bg-peach text-cocoa; }
@@ -23,6 +41,12 @@
 @layer components {
   .container-bx { @apply mx-auto w-full max-w-6xl px-5 sm:px-8; }
   .section { @apply py-14 sm:py-20; }
+
+  /* Standard top-level page padding. */
+  .page { @apply py-10 sm:py-14; }
+
+  /* Centred empty / confirmation states want more air. */
+  .page-center { @apply py-20 text-center sm:py-28; }
 
   /* ---- type ---- */
   .t-display { @apply font-display text-[2.15rem] leading-[1.25] sm:text-5xl; font-weight:500; }

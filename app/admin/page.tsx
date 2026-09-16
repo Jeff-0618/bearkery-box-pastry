@@ -28,7 +28,7 @@ export default function AdminPage() {
   const stamp = new Date().toISOString().split("T")[0];
 
   return (
-    <div className="container-bx py-12">
+    <div className="container-bx page">
       <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className="t-eyebrow mb-2">Internal</p>

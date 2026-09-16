@@ -32,8 +32,9 @@ export default function WhatsappFab() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Order on WhatsApp"
+      style={{ bottom: "calc(1rem + env(safe-area-inset-bottom))" }}
       className={cx(
-        "fixed bottom-5 right-5 z-[80] flex items-center gap-2 rounded-pill bg-[#25D366] px-5 py-3.5",
+        "fixed right-4 z-[80] flex items-center gap-2 rounded-pill bg-[#25D366] px-4 py-3 sm:right-5 sm:px-5 sm:py-3.5",
         "text-sm font-semibold text-white shadow-lifted transition-all duration-500 ease-gentle",
         "hover:brightness-105 active:scale-95",
         shown ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"

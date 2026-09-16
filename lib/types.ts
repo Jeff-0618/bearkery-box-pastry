@@ -1,7 +1,7 @@
 export type CollectionSlug =
   | "pudding-burnt-cake"
   | "everyday-favourites"
-  | "bento-cake"
+  | "hand-drawn-cakes"
   // Retained so the components stay wired up; hidden from the storefront
   // via `isHidden` below. No fictional data is ever shown for these.
   | "tiny-blessings"

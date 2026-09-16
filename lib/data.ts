@@ -31,13 +31,13 @@ export const COLLECTIONS: Collection[] = [
     pickupNote: "Pickup 7:00 AM – 11:00 AM",
   },
   {
-    slug: "bento-cake",
-    name: "Bento Cakes",
-    tagline: "Little cakes, big moments",
+    slug: "hand-drawn-cakes",
+    name: "Hand-Drawn Cakes",
+    tagline: "Drawn by hand, just for you",
     description:
-      "Personal-size 4 inch cakes, packed in a neat bento box — just enough for one quiet celebration.",
-    story: "Little cakes, big moments.",
-    image: "/products/pudding-burnt-cake.jpg",
+      "Soft cream cakes with your own picture piped on top by hand — a family portrait, a private joke, a name and a number.",
+    story: "A little cake for your special moments.",
+    image: "/products/handdrawn-birthday.jpg",
   },
 
   // ---- Hidden: retained for future use, never shown ----
@@ -56,18 +56,20 @@ export const PRODUCTS: Product[] = [
     slug: "pudding-burnt-cake",
     name: "Pudding Burnt Cake",
     collection: "pudding-burnt-cake",
-    shortDescription: "Our signature — burnt caramel top, silky pudding, soft cake base.",
+    shortDescription: "Our signature — burnt caramel top over silky pudding and soft cake.",
     description:
-      "Our signature bake. A deep caramelised top gives way to silky pudding and a soft cake base, finished with a pour of caramel. Baked fresh to order.",
-    images: ["/products/pudding-burnt-cake.jpg"],
+      "Our signature bake. A deep caramelised top gives way to silky pudding and a soft cake base. Baked fresh to order.",
+    images: [
+      "/products/pudding-burnt-cake.jpg",
+      "/products/pbc-group.jpg",
+      "/products/pbc-flavours.jpg",
+    ],
     variants: [
       { id: "vanilla", label: "Vanilla", price: 7 },
       { id: "chocolate", label: "Chocolate", price: 7 },
       { id: "vanilla-chocolate", label: "Vanilla Chocolate", price: 7 },
       { id: "matcha", label: "Matcha", price: 8.5 },
       { id: "matcha-earl-grey", label: "Matcha Earl Grey", price: 8.5 },
-      { id: "cream-vanilla", label: "Cream Vanilla Pudding Cake", price: null },
-      { id: "cream-oreo-chocolate", label: "Cream Oreo Chocolate Pudding Cake", price: null },
     ],
     preorderDays: 2,
     allergens: ["Egg", "Dairy", "Gluten"],
@@ -81,8 +83,8 @@ export const PRODUCTS: Product[] = [
     collection: "pudding-burnt-cake",
     shortDescription: "Our signature bake, sized to share.",
     description:
-      "The same signature burnt caramel top, silky pudding and soft cake base — baked at 6 inch, sized for sharing.",
-    images: ["/products/pudding-burnt-cake.jpg"],
+      "The same burnt caramel top, silky pudding and soft cake base — baked at 6 inch, sized for sharing.",
+    images: ["/products/pbc-group.jpg", "/products/pudding-burnt-cake.jpg"],
     variants: [
       { id: "vanilla-6", label: "Vanilla", price: 55 },
       { id: "chocolate-6", label: "Chocolate", price: 55 },
@@ -163,22 +165,66 @@ export const PRODUCTS: Product[] = [
 
   // ================= BENTO CAKES =================
   {
-    id: "bento-4inch",
-    slug: "bento-cake",
-    name: "Bento Cake — 4 Inch",
-    collection: "bento-cake",
-    shortDescription: "A personal-size cake, packed in a neat bento box.",
+    id: "hd-4inch",
+    slug: "hand-drawn-cake-4-inch",
+    name: "Hand-Drawn Cake — 4 Inch",
+    collection: "hand-drawn-cakes",
+    shortDescription: "A personal-size cake with your picture drawn on top.",
     description:
-      "A personal-size 4 inch cake packed in a neat bento box — just enough for one quiet celebration. Choose your flavour below.",
-    images: ["/products/pudding-burnt-cake.jpg"],
-    variants: [
-      { id: "vanilla-pudding", label: "Vanilla Pudding", price: null },
-      { id: "chocolate-pudding", label: "Chocolate Pudding", price: null },
-      { id: "matcha-pudding", label: "Matcha Pudding", price: null },
-      { id: "chocolate-oreo", label: "Chocolate Oreo", price: null },
-      { id: "vanilla-pudding-strawberry", label: "Vanilla Pudding Strawberry", price: null },
+      "A 4 inch cake in a bento box, finished with a drawing piped by hand. Layers of honey cake, pudding and light whipped cream. Tell us what to draw when you order.",
+    images: [
+      "/products/handdrawn-bento.jpg",
+      "/products/handdrawn-layers-bento.jpg",
     ],
-    preorderDays: 2,
+    variants: [
+      { id: "vanilla-pudding-4", label: "Vanilla Pudding", price: 28 },
+      { id: "chocolate-pudding-4", label: "Chocolate Pudding", price: 32 },
+      { id: "matcha-pudding-4", label: "Matcha Pudding", price: 35 },
+    ],
+    preorderDays: 3,
+    allergens: ["Egg", "Dairy", "Gluten"],
+    isPreorderOnly: true,
+  },
+  {
+    id: "hd-6inch",
+    slug: "hand-drawn-cake-6-inch",
+    name: "Hand-Drawn Cake — 6 Inch",
+    collection: "hand-drawn-cakes",
+    shortDescription: "Enough to share, with your own drawing on top.",
+    description:
+      "A 6 inch cake finished with a drawing piped by hand — a family portrait, a private joke, a name and a number. Layers of soft sponge, pudding and light cream.",
+    images: [
+      "/products/handdrawn-birthday.jpg",
+      "/products/handdrawn-layers-1.jpg",
+      "/products/handdrawn-family.jpg",
+    ],
+    variants: [
+      { id: "vanilla-6", label: "Vanilla", price: 65 },
+      { id: "chocolate-6", label: "Chocolate", price: 69 },
+      { id: "matcha-oreo-6", label: "Matcha Oreo", price: 72 },
+    ],
+    preorderDays: 4,
+    allergens: ["Egg", "Dairy", "Gluten"],
+    isPreorderOnly: true,
+  },
+  {
+    id: "hd-8inch",
+    slug: "hand-drawn-cake-8-inch",
+    name: "Hand-Drawn Cake — 8 Inch",
+    collection: "hand-drawn-cakes",
+    shortDescription: "Our largest hand-drawn cake, for a full table.",
+    description:
+      "An 8 inch cake finished with a drawing piped by hand, sized for a bigger gathering. Layers of soft sponge, pudding and light cream.",
+    images: [
+      "/products/handdrawn-singing.jpg",
+      "/products/handdrawn-layers-2.jpg",
+    ],
+    variants: [
+      { id: "vanilla-8", label: "Vanilla", price: 120 },
+      { id: "chocolate-8", label: "Chocolate", price: 130 },
+      { id: "matcha-8", label: "Matcha", price: 140 },
+    ],
+    preorderDays: 5,
     allergens: ["Egg", "Dairy", "Gluten"],
     isPreorderOnly: true,
   },

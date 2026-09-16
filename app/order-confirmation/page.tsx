@@ -26,7 +26,7 @@ function ConfirmationContent() {
 
   if (!order) {
     return (
-      <div className="container-bx py-24 text-center">
+      <div className="container-bx page-center">
         <h1 className="text-2xl font-medium">We couldn't find that order</h1>
         <p className="mt-2 text-taupe">
           It may already be complete, or the link has expired.
@@ -37,7 +37,7 @@ function ConfirmationContent() {
   }
 
   return (
-    <div className="container-bx py-16">
+    <div className="container-bx page">
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
@@ -148,7 +148,7 @@ function ConfirmationContent() {
 
 export default function OrderConfirmationPage() {
   return (
-    <Suspense fallback={<div className="container-bx py-24 text-center text-taupe">Loading…</div>}>
+    <Suspense fallback={<div className="container-bx page-center text-taupe">Loading…</div>}>
       <ConfirmationContent />
     </Suspense>
   );

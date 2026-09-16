@@ -29,6 +29,7 @@ export const metadata: Metadata = {
   },
   description:
     "Bearkery Box Pastry bakes warm, handmade cakes, cupcakes and gift boxes for birthdays, baby showers, weddings and everyday blessings. Preorder online for delivery or pickup.",
+  icons: { icon: "/logo-mark.png", apple: "/logo-mark.png" },
   keywords: [
     "handmade bakery",
     "cake preorder",
@@ -63,7 +64,7 @@ export default function RootLayout({
           </a>
           <DemoBanner />
           <Header />
-          <main id="main-content">{children}</main>
+          <main id="main-content" className="pb-24 sm:pb-16">{children}</main>
           <Footer />
           <WhatsappFab />
         </FlyToCartProvider>

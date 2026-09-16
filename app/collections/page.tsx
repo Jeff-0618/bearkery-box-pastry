@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function CollectionsPage() {
   return (
-    <div className="container-bx py-14">
+    <div className="container-bx page">
       <SectionHeading
         t-eyebrow="All collections"
         title="Find the bake for your moment"

@@ -53,7 +53,7 @@ export default function AboutPage() {
       </section>
 
       {/* Meet Our Teddy */}
-      <section className="container-bx py-20">
+      <section className="container-bx section">
         <div className="grid items-center gap-10 md:grid-cols-2">
           <div className="order-2 md:order-1">
             <p className="t-eyebrow mb-4">Meet Our Teddy</p>
@@ -67,7 +67,7 @@ export default function AboutPage() {
               order is a hand that cared enough to make it well.
             </p>
           </div>
-          <div className="order-1 mx-auto h-56 w-56 md:order-2">
+          <div className="order-1 mx-auto w-52 sm:w-60 md:order-2">
             <Bear priority />
           </div>
         </div>
@@ -96,7 +96,7 @@ export default function AboutPage() {
       </section>
 
       {/* Made With Love */}
-      <section className="container-bx py-20">
+      <section className="container-bx section">
         <SectionHeading
           t-eyebrow="Made With Love"
           title="Three things that guide every bake"

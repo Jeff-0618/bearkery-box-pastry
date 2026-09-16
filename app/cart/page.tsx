@@ -12,7 +12,7 @@ export default function CartPage() {
 
   if (items.length === 0) {
     return (
-      <div className="container-bx flex flex-col items-center gap-4 py-24 text-center">
+      <div className="container-bx page-center flex flex-col items-center gap-4">
         <div className="w-36">
           <Bear priority />
         </div>
@@ -28,7 +28,7 @@ export default function CartPage() {
   }
 
   return (
-    <div className="container-bx py-12">
+    <div className="container-bx page">
       <h1 className="mb-8 text-3xl font-medium">Your Gift Basket</h1>
       <div className="grid gap-10 lg:grid-cols-[1.6fr_1fr]">
         <div className="paper px-6">

@@ -17,7 +17,7 @@ const INFO = [
 
 export default function ContactPage() {
   return (
-    <div className="container-bx py-16">
+    <div className="container-bx page">
       <SectionHeading
         t-eyebrow="We'd love to hear from you"
         title="Get in touch"

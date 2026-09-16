@@ -43,7 +43,10 @@ export default function Bear({
   }
 
   return (
-    <div className={cx("relative", className)}>
+    // `max-w-full` + intrinsic ratio keeps the bear inside whatever box the
+    // caller gives it, so a mis-sized container can never let it spill over
+    // and cover adjacent text.
+    <div className={cx("relative mx-auto max-w-full", className)}>
       <Image
         src="/bear/hero-bear.png"
         alt="Bearkery's teddy bear holding a pudding burnt cake"
@@ -53,7 +56,7 @@ export default function Bear({
         onLoad={() => setLoaded(true)}
         onError={() => setMissing(true)}
         className={cx(
-          "h-auto w-full object-contain transition-all duration-1000 ease-gentle",
+          "h-auto w-full max-w-full object-contain transition-all duration-1000 ease-gentle",
           breathe && "motion-safe:animate-breathe",
           loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
         )}

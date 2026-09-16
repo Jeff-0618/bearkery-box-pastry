@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { VISIBLE_COLLECTIONS } from "@/lib/data";
-import { BearMark } from "./Header";
+import Image from "next/image";
 import NewsletterForm from "./NewsletterForm";
 
 export default function Footer() {
@@ -9,11 +9,16 @@ export default function Footer() {
       <div className="container-bx grid gap-12 py-16 md:grid-cols-4">
         <div className="md:col-span-1">
           <div className="mb-3 flex items-center gap-2">
-            <BearMark />
-            <span className="font-display text-lg font-semibold">Bearkery Box</span>
+            <Image
+              src="/logo.png"
+              alt="Bearkery Box Pastry"
+              width={160}
+              height={115}
+              className="h-auto w-32"
+            />
           </div>
           <p className="text-sm leading-relaxed text-taupe">
-            Handmade cakes and gift boxes, baked warm with every blessing in mind.
+            Pudding burnt cakes, hand-drawn cakes and morning sandwiches, made fresh in Seri Kembangan.
           </p>
         </div>
 

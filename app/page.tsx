@@ -1,7 +1,8 @@
 import Hero from "@/components/home/Hero";
 import SignatureProduct from "@/components/home/SignatureProduct";
 import EverydayFavouritesSection from "@/components/home/EverydayFavouritesSection";
-import BentoSection from "@/components/home/BentoSection";
+import HandDrawnSection from "@/components/home/HandDrawnSection";
+import SeasonalSection from "@/components/home/SeasonalSection";
 import HowItWorks from "@/components/home/HowItWorks";
 import QuietWords from "@/components/home/QuietWords";
 import SpecialOrders from "@/components/home/SpecialOrders";
@@ -19,7 +20,8 @@ export default function HomePage() {
       <Hero />
       <SignatureProduct />
       <EverydayFavouritesSection />
-      <BentoSection />
+      <HandDrawnSection />
+      <SeasonalSection />
       <HowItWorks />
       <QuietWords />
       <SpecialOrders />

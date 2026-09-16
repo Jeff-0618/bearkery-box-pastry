@@ -84,7 +84,7 @@ export default function CheckoutPage() {
 
   if (items.length === 0) {
     return (
-      <div className="container-bx py-24 text-center">
+      <div className="container-bx page-center">
         <h1 className="text-2xl font-medium">Nothing to check out yet</h1>
         <p className="mt-2 text-taupe">Add something to your basket before checking out.</p>
         <Link href="/collections" className="btn-primary mt-6 inline-flex">Browse the menu</Link>
@@ -93,7 +93,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="container-bx py-12">
+    <div className="container-bx page">
       <div className="mb-8 flex items-center gap-4">
         <h1 className="text-3xl font-medium">Checkout</h1>
       </div>
