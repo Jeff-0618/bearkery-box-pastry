@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ImageOff } from "lucide-react";
 import { cx } from "@/lib/utils";
 
@@ -20,6 +20,15 @@ export default function LazyImage({
 }) {
   const [loaded, setLoaded] = useState(false);
   const [errored, setErrored] = useState(false);
+
+  // React keeps the same component instance when only `src` changes, so the
+  // load/error flags have to be cleared by hand. Without this, one image that
+  // fails leaves the component stuck showing the error state for every image
+  // afterwards — a single missing file made the whole gallery look broken.
+  useEffect(() => {
+    setLoaded(false);
+    setErrored(false);
+  }, [src]);
 
   if (errored) {
     return (

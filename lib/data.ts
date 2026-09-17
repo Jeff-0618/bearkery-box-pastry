@@ -18,7 +18,7 @@ export const COLLECTIONS: Collection[] = [
     description:
       "Our signature bake — a caramel-topped burnt layer over silky pudding and soft cake, finished with a pour of caramel.",
     story: "Our little favourite, baked fresh for your sweetest moments.",
-    image: "/products/pudding-burnt-cake.jpg",
+    image: "/products/pbc-hero.jpg",
   },
   {
     slug: "everyday-favourites",
@@ -27,7 +27,7 @@ export const COLLECTIONS: Collection[] = [
     description:
       "Hand-packed sandwiches made fresh each morning — simple, honest, and ready before you head out the door.",
     story: "Fresh little favourites for your everyday mornings.",
-    image: "/products/sandwich-scene.jpg",
+    image: "/products/sandwich-group.jpg",
     pickupNote: "Pickup 7:00 AM – 11:00 AM",
   },
   {
@@ -60,7 +60,7 @@ export const PRODUCTS: Product[] = [
     description:
       "Our signature bake. A deep caramelised top gives way to silky pudding and a soft cake base. Baked fresh to order.",
     images: [
-      "/products/pudding-burnt-cake.jpg",
+      "/products/pbc-hero.jpg",
       "/products/pbc-group.jpg",
       "/products/pbc-flavours.jpg",
       "/products/pbc-cut-4.jpg",
@@ -90,7 +90,7 @@ export const PRODUCTS: Product[] = [
     shortDescription: "Our signature bake, sized to share.",
     description:
       "The same burnt caramel top, silky pudding and soft cake base — baked at 6 inch, sized for sharing.",
-    images: ["/products/pbc-group.jpg", "/products/pudding-burnt-cake.jpg", "/products/pbc-stack.jpg", "/products/pbc-cut-plain.jpg"],
+    images: ["/products/pbc-group.jpg", "/products/pbc-hero.jpg", "/products/pbc-stack.jpg", "/products/pbc-cut-plain.jpg"],
     variants: [
       { id: "vanilla-6", label: "Vanilla", price: 55 },
       { id: "chocolate-6", label: "Chocolate", price: 55 },
