@@ -20,7 +20,17 @@ export default function CartLineItem({ item }: { item: CartItem }) {
       exit={{ opacity: 0, x: -20 }}
       className="flex gap-4 border-b border-line py-6 first:pt-0 last:border-none"
     >
-      <LazyImage src={item.image} alt={item.name} className="h-24 w-24 shrink-0 rounded-soft" />
+      {/*
+        This thumbnail is 96px square and never anything else, so it can say
+        so. On the default `sizes` it was asking for a full-viewport image —
+        a phone was downloading a 400px-wide photo to draw it at 96px.
+      */}
+      <LazyImage
+        src={item.image}
+        alt={item.name}
+        sizes="96px"
+        className="h-24 w-24 shrink-0 rounded-soft"
+      />
 
       <div className="flex flex-1 flex-col gap-1.5">
         <div className="flex items-start justify-between gap-3">

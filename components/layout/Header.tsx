@@ -37,18 +37,34 @@ export default function Header() {
 
   return (
     <>
-    <header className="sticky top-0 z-50 border-b border-line bg-milk/85 backdrop-blur-md">
-      <div className="container-bx flex h-20 items-center justify-between">
-        <Link href="/" className="flex items-center gap-2.5" aria-label="Bearkery Box Pastry home">
+    {/*
+      The header is a single row that must never wrap. On a phone the four
+      controls plus the wordmark came to more than the viewport width, so the
+      wordmark broke onto a second line and its descenders landed beside the
+      theme button. The fix is width, not layout: the brand block is allowed
+      to shrink and is clipped rather than wrapped, and every control is a
+      little smaller below `sm`.
+
+      The backdrop blur is desktop-only. Blurring what is behind a sticky bar
+      forces the phone to recompose that blur on every scroll frame, which is
+      the single most expensive thing on this page while scrolling.
+    */}
+    <header className="sticky top-0 z-50 border-b border-line bg-milk md:bg-milk/85 md:backdrop-blur-md">
+      <div className="container-bx flex h-20 items-center justify-between gap-2">
+        <Link
+          href="/"
+          className="flex min-w-0 items-center gap-2 overflow-hidden sm:gap-2.5"
+          aria-label="Bearkery Box Pastry home"
+        >
           <Image
             src="/logo-mark.png"
             alt=""
             width={40}
             height={31}
             priority
-            className="h-8 w-auto"
+            className="h-7 w-auto shrink-0 sm:h-8"
           />
-          <span className="font-display text-xl font-semibold tracking-tight text-cocoa">
+          <span className="whitespace-nowrap font-display text-base font-semibold tracking-tight text-cocoa sm:text-xl">
             Bearkery <span className="italic text-teddy">Box</span>
           </span>
         </Link>
@@ -65,12 +81,12 @@ export default function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex shrink-0 items-center gap-1.5 sm:gap-3">
           <ThemeToggle />
           <LanguageToggle />
           <Link
             href="/cart"
-            className="relative flex h-11 w-11 items-center justify-center rounded-full border border-line text-cocoa transition hover:bg-cream"
+            className="relative flex h-10 w-10 items-center justify-center rounded-full border border-line text-cocoa transition hover:bg-cream sm:h-11 sm:w-11"
             aria-label={`${t("nav.cart")} (${count})`}
           >
             <ShoppingBag size={18} strokeWidth={1.75} />
@@ -82,7 +98,7 @@ export default function Header() {
           </Link>
           <button
             onClick={() => setOpen(true)}
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-line text-cocoa md:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-cocoa sm:h-11 sm:w-11 md:hidden"
             aria-label="Open menu"
           >
             <Menu size={18} />

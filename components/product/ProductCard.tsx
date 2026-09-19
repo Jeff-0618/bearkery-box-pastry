@@ -28,6 +28,13 @@ export default function ProductCard({ product, index = 0 }: { product: Product; 
           <LazyImage
             src={product.images[0]}
             alt={product.name}
+            /*
+              This card sits in a 2 / 3 / 4 column grid. Without a matching
+              `sizes` every card asked for a half-viewport image — roughly four
+              times the pixels it can show on a desktop grid, downloaded on a
+              phone connection.
+            */
+            sizes="(max-width: 767px) 50vw, (max-width: 1023px) 33vw, 25vw"
             className="aspect-[4/5] w-full transition-transform duration-500 group-hover:scale-[1.03]"
           />
           <div className="absolute left-3 top-3 flex flex-col gap-1.5">

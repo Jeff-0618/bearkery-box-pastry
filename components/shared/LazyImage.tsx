@@ -56,9 +56,17 @@ export default function LazyImage({
         priority={priority}
         onLoad={() => setLoaded(true)}
         onError={() => setErrored(true)}
+        /*
+          Was a 700ms transition on blur + scale + opacity together. Blur is a
+          per-pixel filter, so a grid of photos arriving at once made the phone
+          re-filter several full-size images at the same moment — visible as a
+          stutter just as the page settled. Opacity alone is composited on the
+          GPU and costs nothing, and the shimmer underneath already covers the
+          wait, so nothing is lost but the stall.
+        */
         className={cx(
-          "object-cover transition-all duration-700 ease-out",
-          loaded ? "scale-100 opacity-100 blur-0" : "scale-105 opacity-0 blur-md"
+          "object-cover transition-opacity duration-500 ease-out",
+          loaded ? "opacity-100" : "opacity-0"
         )}
       />
     </div>

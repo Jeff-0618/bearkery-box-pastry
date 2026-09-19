@@ -36,6 +36,7 @@ export default function HandDrawnSection() {
                   <LazyImage
                     src={p.images[0]}
                     alt={p.name}
+                    sizes="(max-width: 639px) 100vw, 33vw"
                     className="aspect-square w-full rounded-soft shadow-paper transition-shadow duration-500 group-hover:shadow-lifted"
                   />
                   <div className="mt-4 flex items-baseline justify-between gap-3">

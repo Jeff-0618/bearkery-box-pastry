@@ -27,6 +27,7 @@ export default function SignatureProduct() {
           <LazyImage
             src={product.images[0]}
             alt={product.name}
+            sizes="(max-width: 1023px) 100vw, 50vw"
             className="aspect-[4/5] w-full rounded-soft shadow-lifted"
           />
           <div
