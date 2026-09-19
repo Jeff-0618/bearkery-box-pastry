@@ -94,7 +94,7 @@ export default function ProductDetailClient({
 
       <section className="container-bx grid gap-10 py-8 lg:grid-cols-2">
         {/* Gallery */}
-        <div className="relative" ref={galleryRef}>
+        <div className="relative min-w-0" ref={galleryRef}>
           <button
             type="button"
             onClick={() => setZoomIndex(activeImage)}
@@ -104,22 +104,46 @@ export default function ProductDetailClient({
             <LazyImage
               src={product.images[activeImage]}
               alt={product.name}
+              /*
+                The gallery is full width until `lg`, not until `md` — which
+                is where the shared default stops. Between those two
+                breakpoints the photo was being served at half the width it
+                was actually drawn at, and looked soft.
+              */
+              sizes="(max-width: 1023px) 100vw, 50vw"
               className="aspect-square w-full rounded-soft shadow-lifted"
               priority
             />
           </button>
           {product.images.length > 1 && (
-            <div className="mt-3 flex gap-2.5">
+            /*
+              A scrolling strip, not a row that grows.
+
+              Nine thumbnails at 64px plus their gaps come to about 650px.
+              With no overflow rule and no `shrink-0`, that row set the width
+              of the whole page: on a phone every other section was then laid
+              out against a 650px canvas the screen could not show, which is
+              why the page could be pinched outward and why it never sat
+              still at one width. Scrolling the strip inside its own box
+              keeps the page exactly as wide as the phone.
+            */
+            <div className="mt-3 flex snap-x gap-2.5 overflow-x-auto pb-2">
               {product.images.map((img, i) => (
                 <button
                   key={img + i}
                   onClick={() => setActiveImage(i)}
                   aria-label={`View image ${i + 1}`}
-                  className={`h-16 w-16 overflow-hidden rounded-xl border-2 transition ${
+                  className={`h-16 w-16 shrink-0 snap-start overflow-hidden rounded-xl border-2 transition ${
                     activeImage === i ? "border-teddy" : "border-transparent opacity-70"
                   }`}
                 >
-                  <LazyImage src={img} alt="" className="h-full w-full" />
+                  {/*
+                    64 pixels, stated plainly. Without this each thumbnail
+                    inherited the full-width default and asked the server for
+                    a screen-sized photo — nine of them, on a phone, to draw
+                    nine small squares.
+                  */}
+                  <LazyImage src={img} alt="" sizes="64px" className="h-full w-full" />
                 </button>
               ))}
             </div>
@@ -127,7 +151,7 @@ export default function ProductDetailClient({
         </div>
 
         {/* Details / configurator */}
-        <div>
+        <div className="min-w-0">
           <div className="mb-2 flex flex-wrap items-center gap-1.5">
             {product.isSignature && <Badge tone="cocoa">Signature</Badge>}
             {product.isPreorderOnly && <Badge>Preorder</Badge>}
