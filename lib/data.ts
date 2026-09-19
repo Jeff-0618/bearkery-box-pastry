@@ -8,6 +8,13 @@ import { Collection, Product } from "./types";
  * Collections/products marked `isHidden: true` are earlier demo placeholders,
  * kept only so their components stay wired for future re-activation. They
  * carry no prices and are never rendered, routed, or listed.
+ *
+ * PHOTO ORDER
+ * `images[0]` does double duty: it is the card cover in every grid AND the
+ * first frame of the product gallery. For the sandwiches that first slot is
+ * now the menu card — it carries the name, the price and the ingredient line,
+ * so a visitor who only ever sees the thumbnail has already been told what
+ * the thing is. The plated photograph follows immediately after.
  */
 
 export const COLLECTIONS: Collection[] = [
@@ -27,7 +34,7 @@ export const COLLECTIONS: Collection[] = [
     description:
       "Hand-packed sandwiches made fresh each morning — simple, honest, and ready before you head out the door.",
     story: "Fresh little favourites for your everyday mornings.",
-    image: "/products/sandwich-group.jpg",
+    image: "/products/menu-sandwiches-all.jpg",
     pickupNote: "Pickup 7:00 AM – 11:00 AM",
   },
   {
@@ -112,7 +119,7 @@ export const PRODUCTS: Product[] = [
     shortDescription: "Our fullest sandwich — ham, burger meat, egg mayo and more.",
     description:
       "Our fullest sandwich, hand-packed fresh every morning. Ready for pickup between 7:00 AM and 11:00 AM, while supplies last.",
-    images: ["/products/signature-sandwich.jpg", "/products/poster-signature.jpg"],
+    images: ["/products/menu-signature.jpg", "/products/signature-sandwich.jpg"],
     variants: [{ id: "reg", label: "Regular", price: 6 }],
     preorderDays: 1,
     ingredients: ["Ham", "Burger Meat", "Egg Mayo", "Salad", "Tomato", "Mayonnaise"],
@@ -128,7 +135,7 @@ export const PRODUCTS: Product[] = [
     shortDescription: "Sausage, egg mayo, chicken floss and crispy youtiao crisps.",
     description:
       "A hearty sandwich with sausage, chicken floss and crispy youtiao crisps, hand-packed fresh every morning. Ready for pickup between 7:00 AM and 11:00 AM, while supplies last.",
-    images: ["/products/sausage-sandwich.jpg"],
+    images: ["/products/menu-sausage.jpg", "/products/sausage-sandwich.jpg"],
     variants: [{ id: "reg", label: "Regular", price: 6 }],
     preorderDays: 1,
     ingredients: ["Sausage", "Egg Mayo", "Tomato", "Salad", "Chicken Floss", "Crispy Youtiao Crisps"],
@@ -144,7 +151,7 @@ export const PRODUCTS: Product[] = [
     shortDescription: "Simple and classic — ham with egg mayo.",
     description:
       "A simple classic: ham layered with egg mayo, hand-packed fresh every morning. Ready for pickup between 7:00 AM and 11:00 AM, while supplies last.",
-    images: ["/products/egg-ham-sandwich.jpg", "/products/poster-egg-ham.jpg"],
+    images: ["/products/menu-egg-ham.jpg", "/products/egg-ham-sandwich.jpg"],
     variants: [{ id: "reg", label: "Regular", price: 5 }],
     preorderDays: 1,
     ingredients: ["Ham", "Egg Mayo"],
@@ -160,7 +167,7 @@ export const PRODUCTS: Product[] = [
     shortDescription: "Salad, tomato and egg mayo.",
     description:
       "A lighter option with salad, tomato and egg mayo, hand-packed fresh every morning. Ready for pickup between 7:00 AM and 11:00 AM, while supplies last.",
-    images: ["/products/vege-sandwich.jpg", "/products/poster-vege.jpg"],
+    images: ["/products/menu-vege.jpg", "/products/vege-sandwich.jpg"],
     variants: [{ id: "reg", label: "Regular", price: 4.5 }],
     preorderDays: 1,
     ingredients: ["Salad", "Tomato", "Egg Mayo"],
