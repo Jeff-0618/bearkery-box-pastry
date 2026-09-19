@@ -8,6 +8,9 @@ import { ChevronRight, ShieldCheck, Sparkles, Clock } from "lucide-react";
 import { Product } from "@/lib/types";
 import { formatPrice, addDays, toISODate } from "@/lib/utils";
 import { useCart } from "@/lib/cart-context";
+import { getCollection } from "@/lib/data";
+import { productText, collectionText } from "@/lib/localize";
+import { useLang } from "@/lib/language";
 import LazyImage from "@/components/shared/LazyImage";
 import Lightbox from "@/components/shared/Lightbox";
 import VariantSelector from "@/components/product/VariantSelector";
@@ -28,6 +31,13 @@ export default function ProductDetailClient({
 }) {
   const router = useRouter();
   const { addItem } = useCart();
+  const { t, lang } = useLang();
+
+  const text = productText(product, lang);
+  const parent = getCollection(product.collection);
+  // A Chinese list is separated by a slightly raised comma, not a Western
+  // one followed by a space.
+  const listSeparator = lang === "zh" ? "、" : ", ";
 
   const [activeImage, setActiveImage] = useState(0);
   const [zoomIndex, setZoomIndex] = useState<number | null>(null);
@@ -61,7 +71,9 @@ export default function ProductDetailClient({
       id: `${product.id}-${variant.id}-${Date.now()}`,
       productId: product.id,
       slug: product.slug,
-      name: product.name,
+      // The name is stored as the customer read it when they chose it. That
+      // is the name they will expect to see back in the WhatsApp message.
+      name: text.name,
       image: product.images[0],
       variant,
       quantity,
@@ -79,16 +91,16 @@ export default function ProductDetailClient({
   return (
     <div>
       <nav aria-label="Breadcrumb" className="container-bx pt-6 text-xs text-taupe">
-        <ol className="flex items-center gap-1.5">
-          <li><Link href="/" className="hover:text-teddy">Home</Link></li>
+        <ol className="flex flex-wrap items-center gap-1.5">
+          <li><Link href="/" className="hover:text-teddy">{t("common.home")}</Link></li>
           <ChevronRight size={12} />
           <li>
-            <Link href={`/collections/${product.collection}`} className="hover:text-teddy capitalize">
-              {product.collection.replace(/-/g, " ")}
+            <Link href={`/collections/${product.collection}`} className="hover:text-teddy">
+              {parent ? collectionText(parent, lang).name : product.collection}
             </Link>
           </li>
           <ChevronRight size={12} />
-          <li aria-current="page" className="text-cocoa">{product.name}</li>
+          <li aria-current="page" className="text-cocoa">{text.name}</li>
         </ol>
       </nav>
 
@@ -98,12 +110,12 @@ export default function ProductDetailClient({
           <button
             type="button"
             onClick={() => setZoomIndex(activeImage)}
-            aria-label="View larger photo"
+            aria-label={t("product.viewLarger")}
             className="block w-full cursor-zoom-in"
           >
             <LazyImage
               src={product.images[activeImage]}
-              alt={product.name}
+              alt={text.name}
               /*
                 The gallery is full width until `lg`, not until `md` — which
                 is where the shared default stops. Between those two
@@ -132,7 +144,7 @@ export default function ProductDetailClient({
                 <button
                   key={img + i}
                   onClick={() => setActiveImage(i)}
-                  aria-label={`View image ${i + 1}`}
+                  aria-label={t("product.viewImage").replace("{n}", String(i + 1))}
                   className={`h-16 w-16 shrink-0 snap-start overflow-hidden rounded-xl border-2 transition ${
                     activeImage === i ? "border-teddy" : "border-transparent opacity-70"
                   }`}
@@ -153,27 +165,27 @@ export default function ProductDetailClient({
         {/* Details / configurator */}
         <div className="min-w-0">
           <div className="mb-2 flex flex-wrap items-center gap-1.5">
-            {product.isSignature && <Badge tone="cocoa">Signature</Badge>}
-            {product.isPreorderOnly && <Badge>Preorder</Badge>}
+            {product.isSignature && <Badge tone="cocoa">{t("product.signature")}</Badge>}
+            {product.isPreorderOnly && <Badge>{t("product.preorderOnly")}</Badge>}
           </div>
-          <h1 className="text-3xl font-medium sm:text-4xl">{product.name}</h1>
+          <h1 className="text-3xl font-medium sm:text-4xl">{text.name}</h1>
 
-          {product.pickupNote && (
+          {text.pickupNote && (
             <p className="mt-2 flex items-center gap-1.5 text-sm text-taupe">
               <Clock size={14} className="text-teddy" />
-              {product.pickupNote}
+              {text.pickupNote}
             </p>
           )}
 
           <p className="mt-4 font-display text-2xl font-semibold text-teddy">
-            {priceKnown ? formatPrice(unitPrice) : "Price on request"}
+            {priceKnown ? formatPrice(unitPrice) : t("product.priceOnRequest")}
           </p>
-          <p className="mt-4 leading-relaxed text-taupe">{product.description}</p>
+          <p className="mt-4 leading-relaxed text-taupe">{text.description}</p>
 
-          {product.ingredients && product.ingredients.length > 0 && (
+          {text.ingredients.length > 0 && (
             <div className="mt-4">
-              <p className="label-bx">Ingredients</p>
-              <p className="text-sm text-taupe">{product.ingredients.join(", ")}</p>
+              <p className="label-bx">{t("product.ingredients")}</p>
+              <p className="text-sm text-taupe">{text.ingredients.join(listSeparator)}</p>
             </div>
           )}
 
@@ -197,11 +209,13 @@ export default function ProductDetailClient({
 
             <GiftDetailsForm value={gift} onChange={setGift} />
 
-            {product.allergens.length > 0 && (
+            {text.allergens.length > 0 && (
               <p className="flex items-start gap-2 text-xs text-taupe">
                 <ShieldCheck size={15} className="mt-0.5 shrink-0 text-teddy" />
-                Contains: {product.allergens.join(", ")}. Baked in a kitchen that handles
-                common allergens.
+                {t("product.allergenNote").replace(
+                  "{list}",
+                  text.allergens.join(listSeparator)
+                )}
               </p>
             )}
 
@@ -212,7 +226,9 @@ export default function ProductDetailClient({
                   onClick={handleAddToCart}
                   className="btn-primary flex-1"
                 >
-                  {added ? "Wrapped ✓" : `Wrap This Gift — ${formatPrice(unitPrice * quantity)}`}
+                  {added
+                    ? t("product.added")
+                    : `${t("product.addToCart")} — ${formatPrice(unitPrice * quantity)}`}
                 </motion.button>
                 <button
                   onClick={() => {
@@ -221,19 +237,18 @@ export default function ProductDetailClient({
                   }}
                   className="btn-soft flex-1"
                 >
-                  Send It Now
+                  {t("product.buyNow")}
                 </button>
               </div>
             ) : (
               <p className="rounded-xl border border-dashed border-teddy/30 bg-blush/30 p-4 text-sm text-taupe">
-                This flavour is priced on request — please contact us for the current price
-                before ordering.
+                {t("product.priceOnRequestNote")}
               </p>
             )}
 
             <p className="flex items-center gap-2 text-xs text-taupe">
               <Sparkles size={14} className="text-teddy" />
-              Freshly baked to order — no two boxes are ever quite the same.
+              {t("product.freshNote")}
             </p>
           </div>
         </div>
@@ -241,7 +256,7 @@ export default function ProductDetailClient({
 
       {related.length > 0 && (
         <section className="container-bx section">
-          <h2 className="mb-6 text-2xl font-medium">You may also love</h2>
+          <h2 className="mb-6 text-2xl font-medium">{t("product.related")}</h2>
           <div className="grid grid-cols-2 gap-5 sm:gap-6 md:grid-cols-4">
             {related.map((p, i) => (
               <ProductCard key={p.id} product={p} index={i} />

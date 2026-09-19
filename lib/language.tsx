@@ -138,6 +138,44 @@ const en: Dict = {
   "product.preorderOnly": "Preorder Only",
   "product.signature": "Signature",
   "product.fromPrice": "From {price}",
+  "product.chooseFlavour": "Choose a flavour",
+  "product.decreaseQty": "Decrease quantity",
+  "product.increaseQty": "Increase quantity",
+  "product.viewLarger": "View larger photo",
+  "product.viewImage": "View image {n}",
+  "product.allergenNote":
+    "Contains {list}. Baked in a kitchen that handles common allergens.",
+  "product.priceOnRequestNote":
+    "This flavour is priced on request — please contact us for the current price before ordering.",
+  "product.freshNote": "Freshly baked to order — no two boxes are ever quite the same.",
+
+  // ---- fulfillment & dates ----
+  "fulfillment.label": "Fulfillment",
+  "fulfillment.method": "Fulfillment method",
+  "fulfillment.delivery": "Delivery",
+  "fulfillment.deliveryHint": "To your door",
+  "fulfillment.pickup": "Pickup",
+  "fulfillment.pickupHint": "From our kitchen",
+  "fulfillment.deliveryDate": "Delivery date",
+  "fulfillment.pickupDate": "Pickup date",
+  "fulfillment.dayUnit": "day",
+  "fulfillment.daysUnit": "days",
+  "fulfillment.noticeDelivery":
+    "This bake needs at least {notice} notice — earliest delivery is {date}.",
+  "fulfillment.noticePickup":
+    "This bake needs at least {notice} notice — earliest pickup is {date}.",
+
+  // ---- gift / personalisation ----
+  "gift.heading": "Personalise this bake",
+  "gift.recipient": "Recipient name (optional)",
+  "gift.recipientPlaceholder": "Who is this bake for?",
+  "gift.cakeMessage": "Cake message (piped in icing)",
+  "gift.cakeMessagePlaceholder": "e.g. Happy Birthday Mia",
+  "gift.isGift": "This is a gift — include a gift card",
+  "gift.cardMessage": "Gift card message",
+  "gift.cardMessagePlaceholder": "Write a little blessing...",
+  "gift.specialRequest": "Special request (optional)",
+  "gift.specialRequestPlaceholder": "Allergies, colour preferences, candles, etc.",
 
   "cart.title": "Your Gift Basket",
   "cart.empty": "Your gift basket is waiting to be filled",
@@ -339,6 +377,41 @@ const zh: Dict = {
   "product.preorderOnly": "需预订",
   "product.signature": "招牌",
   "product.fromPrice": "{price} 起",
+  "product.chooseFlavour": "选择口味",
+  "product.decreaseQty": "减少数量",
+  "product.increaseQty": "增加数量",
+  "product.viewLarger": "查看大图",
+  "product.viewImage": "查看第 {n} 张图",
+  "product.allergenNote": "含有 {list}。本厨房同时处理常见过敏原。",
+  "product.priceOnRequestNote":
+    "这个口味的价格需要个别洽询 — 下单前请先联络我们确认价钱。",
+  "product.freshNote": "接单现烤 — 没有两盒会长得一模一样。",
+
+  // ---- fulfillment & dates ----
+  "fulfillment.label": "取货方式",
+  "fulfillment.method": "取货方式",
+  "fulfillment.delivery": "外送",
+  "fulfillment.deliveryHint": "送到你家门口",
+  "fulfillment.pickup": "自取",
+  "fulfillment.pickupHint": "到我们的厨房拿",
+  "fulfillment.deliveryDate": "外送日期",
+  "fulfillment.pickupDate": "取货日期",
+  "fulfillment.dayUnit": "天",
+  "fulfillment.daysUnit": "天",
+  "fulfillment.noticeDelivery": "这一款需要至少提前 {notice} — 最早可外送日期是 {date}。",
+  "fulfillment.noticePickup": "这一款需要至少提前 {notice} — 最早可取货日期是 {date}。",
+
+  // ---- gift / personalisation ----
+  "gift.heading": "为这一份加点心意",
+  "gift.recipient": "收礼人姓名（选填）",
+  "gift.recipientPlaceholder": "这一份要送给谁？",
+  "gift.cakeMessage": "蛋糕上的文字（用糖霜写上去）",
+  "gift.cakeMessagePlaceholder": "例如：生日快乐 Mia",
+  "gift.isGift": "这是一份礼物 — 请附上一张小卡",
+  "gift.cardMessage": "小卡上想写的话",
+  "gift.cardMessagePlaceholder": "写一句小小的祝福……",
+  "gift.specialRequest": "特别要求（选填）",
+  "gift.specialRequestPlaceholder": "过敏、颜色偏好、蜡烛等等",
 
   "cart.title": "你的礼物篮",
   "cart.empty": "礼物篮还空着",

@@ -2,6 +2,8 @@
 
 import { ProductVariant } from "@/lib/types";
 import { cx, formatPrice } from "@/lib/utils";
+import { variantLabel } from "@/lib/localize";
+import { useLang } from "@/lib/language";
 
 export default function VariantSelector({
   variants,
@@ -12,9 +14,11 @@ export default function VariantSelector({
   selectedId: string;
   onSelect: (id: string) => void;
 }) {
+  const { t, lang } = useLang();
+
   return (
     <fieldset>
-      <legend className="label-bx">Choose a flavour</legend>
+      <legend className="label-bx">{t("product.chooseFlavour")}</legend>
       <div className="flex flex-wrap gap-2.5" role="radiogroup">
         {variants.map((v) => {
           const active = v.id === selectedId;
@@ -32,9 +36,9 @@ export default function VariantSelector({
                   : "border-line bg-surface text-cocoa hover:border-teddy"
               )}
             >
-              <span className="block font-medium">{v.label}</span>
+              <span className="block font-medium">{variantLabel(v, lang)}</span>
               <span className={cx("block text-xs", active ? "text-milk/70" : "text-taupe")}>
-                {v.price === null ? "Price on request" : formatPrice(v.price)}
+                {v.price === null ? t("product.priceOnRequest") : formatPrice(v.price)}
               </span>
             </button>
           );

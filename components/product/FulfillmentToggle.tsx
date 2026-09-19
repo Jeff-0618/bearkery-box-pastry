@@ -3,6 +3,7 @@
 import { Truck, Store } from "lucide-react";
 import { FulfillmentMethod } from "@/lib/types";
 import { cx } from "@/lib/utils";
+import { useLang } from "@/lib/language";
 
 export default function FulfillmentToggle({
   value,
@@ -11,15 +12,27 @@ export default function FulfillmentToggle({
   value: FulfillmentMethod;
   onChange: (val: FulfillmentMethod) => void;
 }) {
+  const { t } = useLang();
+
   const options: { id: FulfillmentMethod; label: string; hint: string; icon: React.ReactNode }[] = [
-    { id: "delivery", label: "Delivery", hint: "To your door", icon: <Truck size={16} /> },
-    { id: "pickup", label: "Pickup", hint: "From our kitchen", icon: <Store size={16} /> },
+    {
+      id: "delivery",
+      label: t("fulfillment.delivery"),
+      hint: t("fulfillment.deliveryHint"),
+      icon: <Truck size={16} />,
+    },
+    {
+      id: "pickup",
+      label: t("fulfillment.pickup"),
+      hint: t("fulfillment.pickupHint"),
+      icon: <Store size={16} />,
+    },
   ];
 
   return (
     <div>
-      <p className="label-bx">Fulfillment</p>
-      <div className="grid grid-cols-2 gap-2.5" role="radiogroup" aria-label="Fulfillment method">
+      <p className="label-bx">{t("fulfillment.label")}</p>
+      <div className="grid grid-cols-2 gap-2.5" role="radiogroup" aria-label={t("fulfillment.method")}>
         {options.map((opt) => {
           const active = value === opt.id;
           return (
@@ -36,8 +49,8 @@ export default function FulfillmentToggle({
                   : "border-line bg-surface text-cocoa hover:border-teddy"
               )}
             >
-              <span className={active ? "text-teddy" : "text-teddy"}>{opt.icon}</span>
-              <span>
+              <span className="text-teddy">{opt.icon}</span>
+              <span className="min-w-0">
                 <span className="block text-sm font-semibold">{opt.label}</span>
                 <span className={cx("block text-xs", active ? "text-milk/70" : "text-taupe")}>
                   {opt.hint}
