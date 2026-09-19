@@ -137,6 +137,7 @@ const en: Dict = {
   "product.related": "You may also love",
   "product.preorderOnly": "Preorder Only",
   "product.signature": "Signature",
+  "product.fromPrice": "From {price}",
 
   "cart.title": "Your Gift Basket",
   "cart.empty": "Your gift basket is waiting to be filled",
@@ -184,6 +185,46 @@ const en: Dict = {
     "That's the whole promise, really — nothing baked here leaves our kitchen until we'd be happy to hand it to our own family.",
   "about.promiseCta": "Order Now",
 
+  // ---- collections ----
+  "collections.eyebrow": "All collections",
+  "collections.title": "Find the bake for your moment",
+  "collections.description":
+    "Every collection is baked to order, hand-finished, and carries its own little story.",
+  "collections.count": "{n} bakes",
+  "collections.emptyTitle": "Fresh bakes coming soon",
+  "collections.emptyBody":
+    "We're preparing new additions for this collection. Check back shortly.",
+
+  // ---- faq ----
+  "faq.eyebrow": "Good to know",
+  "faq.title": "Frequently asked questions",
+  "faq.description": "Everything you need to know before you order.",
+
+  "faq.q1": "How do I place an order?",
+  "faq.a1":
+    "Choose what you'd like on the site, then send the order through WhatsApp at checkout — your selections, dates and details are filled in for you. We'll reply to confirm availability, the final total, and payment.",
+  "faq.q2": "Do you take payment on the website?",
+  "faq.a2":
+    "Not yet. Everything is confirmed and paid directly with us over WhatsApp, so nothing is charged through the site.",
+  "faq.q3": "How far in advance do I need to preorder?",
+  "faq.a3":
+    "It depends on the bake — sandwiches need the least notice and the larger cakes need the most. The exact lead time is shown on each product page, and the date picker only offers dates we can actually make.",
+  "faq.q4": "What time can I pick up the breakfast sandwiches?",
+  "faq.a4":
+    "Sandwiches are hand-packed fresh each morning and available for pickup between {sandwichHours}, while supplies last. Other bakes follow our general pickup hours of {generalHours}.",
+  "faq.q5": "Where do I collect my order?",
+  "faq.a5":
+    "From our bakery at {address}. You can call or WhatsApp us at {phone} if you need help finding us.",
+  "faq.q6": "Some flavours show 'Price on request' — why?",
+  "faq.a6":
+    "A few flavours are priced individually depending on what you need. Message us on WhatsApp and we'll confirm the price before you order.",
+  "faq.q7": "Can I order a custom or celebration gift box?",
+  "faq.a7":
+    "Yes — baby celebration boxes, traditional ceremony gifts, custom and corporate orders are arranged personally rather than through the cart. Use the Start a conversation button and we'll plan it with you.",
+  "faq.q8": "What if I have a food allergy?",
+  "faq.a8":
+    "Each product lists common allergens. You can also leave a note in the Special Request field, and our kitchen team will reach out if there's anything to confirm.",
+
   // ---- footer ----
   "footer.tagline": "Pudding burnt cakes, hand-drawn cakes and morning sandwiches, made fresh in Seri Kembangan.",
   "footer.collections": "Collections",
@@ -193,6 +234,7 @@ const en: Dict = {
   // ---- misc ----
   "common.viewAll": "View All Collections",
   "common.explore": "Explore",
+  "common.home": "Home",
   "common.backHome": "Back to Home",
 };
 
@@ -296,6 +338,7 @@ const zh: Dict = {
   "product.related": "你可能也会喜欢",
   "product.preorderOnly": "需预订",
   "product.signature": "招牌",
+  "product.fromPrice": "{price} 起",
 
   "cart.title": "你的礼物篮",
   "cart.empty": "礼物篮还空着",
@@ -341,6 +384,44 @@ const zh: Dict = {
     "说穿了，承诺就这一句 — 这里烤出来的东西，如果我们自己不愿意拿给家人，就不会离开这间厨房。",
   "about.promiseCta": "立即订购",
 
+  // ---- collections ----
+  "collections.eyebrow": "全部系列",
+  "collections.title": "找到属于这个时刻的那一款",
+  "collections.description": "每个系列都是接单现做、手工完成，各自带着一个小故事。",
+  "collections.count": "共 {n} 款",
+  "collections.emptyTitle": "新品即将上架",
+  "collections.emptyBody": "我们正在为这个系列准备新的品项，请稍后再回来看看。",
+
+  // ---- faq ----
+  "faq.eyebrow": "订购前先看看",
+  "faq.title": "常见问题",
+  "faq.description": "下单前你会想知道的事，都在这里。",
+
+  "faq.q1": "要怎么下单？",
+  "faq.a1":
+    "在网站上选好想要的，结账时透过 WhatsApp 把订单送出 — 你选的品项、日期和资料都会自动帮你填好。我们会回覆确认是否有货、最后金额，以及付款方式。",
+  "faq.q2": "网站上可以付款吗？",
+  "faq.a2":
+    "目前还不行。所有确认与付款都是直接透过 WhatsApp 跟我们完成，网站不会向你收取任何费用。",
+  "faq.q3": "需要提前多久预订？",
+  "faq.a3":
+    "看品项 — 三文治需要的时间最短，大蛋糕最长。每个产品页都写明确切的天数，日期选择器也只会让你选到我们真的做得出来的日期。",
+  "faq.q4": "早餐三文治几点可以取？",
+  "faq.a4":
+    "三文治每天早上手工现做现包，取货时间 {sandwichHours}，售完即止。其他烘焙品依照我们一般的取货时间 {generalHours}。",
+  "faq.q5": "要去哪里取货？",
+  "faq.a5":
+    "到我们的烘焙坊：{address}。找不到路的话，可以打电话或 WhatsApp 给我们：{phone}。",
+  "faq.q6": "为什么有些口味写「价格请洽询」？",
+  "faq.a6":
+    "有几个口味要看你的需求个别报价。WhatsApp 讯息给我们，下单前我们会先跟你确认价钱。",
+  "faq.q7": "可以订制礼盒或庆祝礼盒吗？",
+  "faq.a7":
+    "可以 — 满月礼盒、传统礼俗礼盒、订制与企业订单，都是由专人安排，不走购物车。按「开始洽谈」，我们陪你一起规划。",
+  "faq.q8": "有食物过敏怎么办？",
+  "faq.a8":
+    "每个产品都列出了常见过敏原。你也可以在「特别要求」栏位留言，如果有需要确认的地方，厨房会主动联络你。",
+
   // ---- footer ----
   "footer.tagline": "布丁烧蛋糕、手绘蛋糕与早餐三文治，在沙登新鲜手作。",
   "footer.collections": "产品系列",
@@ -350,6 +431,7 @@ const zh: Dict = {
   // ---- misc ----
   "common.viewAll": "查看全部系列",
   "common.explore": "查看",
+  "common.home": "首页",
   "common.backHome": "回到首页",
 };
 

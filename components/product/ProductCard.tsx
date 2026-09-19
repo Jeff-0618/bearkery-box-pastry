@@ -5,12 +5,27 @@ import { motion } from "framer-motion";
 import { Product } from "@/lib/types";
 import { formatPrice } from "@/lib/utils";
 import { getFromPrice } from "@/lib/data";
+import { productText } from "@/lib/localize";
+import { useLang } from "@/lib/language";
 import { Badge } from "@/components/ui/Badge";
 import LazyImage from "@/components/shared/LazyImage";
 
 export default function ProductCard({ product, index = 0 }: { product: Product; index?: number }) {
+  const { t, lang } = useLang();
+  const text = productText(product, lang);
   const fromPrice = getFromPrice(product);
-  const priceLabel = fromPrice === null ? "Price on request" : `From ${formatPrice(fromPrice)}`;
+
+  /*
+    "From RM6.00" in English becomes "RM6.00 起" in Chinese — the word moves
+    to the other side of the number. So the whole phrase is one dictionary
+    string with a slot for the price, not a translated word stuck onto a
+    formatted number. (The old hand-drawn section did the latter and read
+    "起 RM28.00" in Chinese.)
+  */
+  const priceLabel =
+    fromPrice === null
+      ? t("product.priceOnRequest")
+      : t("product.fromPrice").replace("{price}", formatPrice(fromPrice));
 
   return (
     <motion.div
@@ -22,12 +37,12 @@ export default function ProductCard({ product, index = 0 }: { product: Product; 
       <Link
         href={`/product/${product.slug}`}
         className="group block"
-        aria-label={`${product.name}, ${priceLabel}`}
+        aria-label={`${text.name}, ${priceLabel}`}
       >
         <div className="relative overflow-hidden rounded-2xl shadow-paper transition-shadow duration-300 group-hover:shadow-paper">
           <LazyImage
             src={product.images[0]}
-            alt={product.name}
+            alt={text.name}
             /*
               This card sits in a 2 / 3 / 4 column grid. Without a matching
               `sizes` every card asked for a half-viewport image — roughly four
@@ -38,18 +53,18 @@ export default function ProductCard({ product, index = 0 }: { product: Product; 
             className="aspect-[4/5] w-full transition-transform duration-500 group-hover:scale-[1.03]"
           />
           <div className="absolute left-3 top-3 flex flex-col gap-1.5">
-            {product.isSignature && <Badge tone="cocoa">Signature</Badge>}
-            {product.isPreorderOnly && <Badge>Preorder</Badge>}
+            {product.isSignature && <Badge tone="cocoa">{t("product.signature")}</Badge>}
+            {product.isPreorderOnly && <Badge>{t("product.preorderOnly")}</Badge>}
           </div>
         </div>
 
         <div className="mt-4 flex items-start justify-between gap-3">
-          <div>
+          <div className="min-w-0">
             <h3 className="font-display text-base font-medium leading-snug text-cocoa">
-              {product.name}
+              {text.name}
             </h3>
             <p className="mt-1 line-clamp-1 text-sm text-cocoa/55">
-              {product.shortDescription}
+              {text.shortDescription}
             </p>
           </div>
           <span className="whitespace-nowrap pt-1 font-display text-base font-medium text-teddy">
