@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Zen_Maru_Gothic, Poppins } from "next/font/google";
 import "./globals.css";
-import { SITE_URL } from "@/lib/site";
+import { SITE_URL, SITE_URL_IS_PLACEHOLDER, absoluteUrl } from "@/lib/site";
 import { BUSINESS } from "@/lib/business";
 import { CartProvider } from "@/lib/cart-context";
 import { LanguageProvider } from "@/lib/language";
@@ -33,14 +33,15 @@ export const viewport: Viewport = {
 };
 
 // Structured data so search results can show the shop's address and phone.
-// Everything here comes from lib/business.ts — nothing is invented.
+// Everything here comes from lib/business.ts — nothing is invented. The site
+// address and logo URL are left out until a real domain is known.
 const [postalCode, ...cityWords] = BUSINESS.address.line2.split(" ");
+const siteAddress = absoluteUrl("");
 const localBusinessJsonLd = {
   "@context": "https://schema.org",
   "@type": "Bakery",
   name: BUSINESS.name,
-  url: SITE_URL,
-  image: `${SITE_URL}/logo.png`,
+  ...(siteAddress && { url: siteAddress, image: `${siteAddress}/logo.png` }),
   telephone: BUSINESS.phoneDial,
   address: {
     "@type": "PostalAddress",
@@ -56,26 +57,30 @@ export const metadata: Metadata = {
   // Resolves every relative URL below (share images, canonical links) into
   // the absolute form that social apps and search engines require.
   metadataBase: new URL(SITE_URL),
-  alternates: { canonical: "./" },
+  // No canonical until the real domain is known: a canonical pointing at the
+  // placeholder would tell search engines this page lives somewhere else.
+  ...(SITE_URL_IS_PLACEHOLDER ? {} : { alternates: { canonical: "./" } }),
   title: {
     default: "Bearkery Box Pastry — Handmade Cakes & Gifting",
     template: "%s · Bearkery Box Pastry",
   },
+  // Describes what is actually on the menu (same wording as the footer), not
+  // the demo catalogue the site started with.
   description:
-    "Bearkery Box Pastry bakes warm, handmade cakes, cupcakes and gift boxes for birthdays, baby showers, weddings and everyday blessings. Preorder online for delivery or pickup.",
+    "Bearkery Box Pastry makes pudding burnt cakes, hand-drawn cakes and morning sandwiches, fresh in Seri Kembangan. Preorder online and collect from the bakery or have it delivered.",
   icons: { icon: "/logo-mark.png", apple: "/logo-mark.png" },
   keywords: [
-    "handmade bakery",
+    "pudding burnt cake",
+    "hand-drawn cake",
     "cake preorder",
-    "birthday cake delivery",
-    "baby shower cake",
-    "wedding cake",
-    "gift box bakery",
+    "breakfast sandwich",
+    "Seri Kembangan bakery",
+    "handmade bakery",
   ],
   openGraph: {
     title: "Bearkery Box Pastry — Handmade Cakes & Gifting",
     description:
-      "Warm, handmade cakes and gift boxes for every blessing — birthdays, baby showers, weddings and beyond.",
+      "Pudding burnt cakes, hand-drawn cakes and morning sandwiches, made fresh in Seri Kembangan.",
     type: "website",
     siteName: BUSINESS.name,
     locale: "en_MY",

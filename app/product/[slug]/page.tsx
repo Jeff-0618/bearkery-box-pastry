@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { VISIBLE_PRODUCTS, getProduct, getRelatedProducts } from "@/lib/data";
 import { BUSINESS } from "@/lib/business";
-import { SITE_URL } from "@/lib/site";
+import { absoluteUrl } from "@/lib/site";
 import ProductDetailClient from "./ProductDetailClient";
 
 export function generateStaticParams() {
@@ -33,12 +33,17 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   const prices = product.variants
     .map((v) => v.price)
     .filter((p): p is number => p !== null);
+  // Absolute URLs are only included once the real domain is known.
+  const imageUrls = product.images
+    .map((src) => absoluteUrl(src))
+    .filter((u): u is string => Boolean(u));
+  const pageUrl = absoluteUrl(`/product/${product.slug}`);
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.name,
     description: product.description,
-    image: product.images.map((src) => `${SITE_URL}${src}`),
+    ...(imageUrls.length > 0 && { image: imageUrls }),
     brand: { "@type": "Brand", name: BUSINESS.name },
     ...(prices.length > 0 && {
       offers: {
@@ -50,7 +55,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
         availability: product.isPreorderOnly
           ? "https://schema.org/PreOrder"
           : "https://schema.org/InStock",
-        url: `${SITE_URL}/product/${product.slug}`,
+        ...(pageUrl && { url: pageUrl }),
       },
     }),
   };
