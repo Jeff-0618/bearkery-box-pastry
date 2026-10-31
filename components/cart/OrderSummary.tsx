@@ -1,6 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { formatPrice } from "@/lib/utils";
+import { useLang } from "@/lib/language";
 
 export default function OrderSummary({
   subtotal,
@@ -21,21 +23,24 @@ export default function OrderSummary({
   onCta?: () => void;
   disabled?: boolean;
 }) {
+  const { t } = useLang();
   const total = subtotal + deliveryFee;
 
   return (
     <div className="paper sticky top-28 p-6">
-      <h2 className="mb-5 font-display text-lg font-medium">Order Summary</h2>
+      <h2 className="mb-5 font-display text-lg font-medium">{t("cart.summary")}</h2>
 
       <dl className="flex flex-col gap-3 text-sm">
         <div className="flex justify-between">
-          <dt className="text-taupe">Subtotal ({itemCount} item{itemCount === 1 ? "" : "s"})</dt>
+          <dt className="text-taupe">
+            {t(itemCount === 1 ? "cart.subtotalOne" : "cart.subtotalMany", { n: itemCount })}
+          </dt>
           <dd className="font-medium">{formatPrice(subtotal)}</dd>
         </div>
         <div className="flex justify-between">
-          <dt className="text-taupe">Delivery / Pickup</dt>
+          <dt className="text-taupe">{t("cart.deliveryPickup")}</dt>
           <dd className="font-medium">
-            {deliveryFee === 0 ? "Confirmed with you" : formatPrice(deliveryFee)}
+            {deliveryFee === 0 ? t("cart.confirmedWithYou") : formatPrice(deliveryFee)}
           </dd>
         </div>
       </dl>
@@ -43,14 +48,14 @@ export default function OrderSummary({
       <div className="my-5 border-t border-dashed border-line" />
 
       <div className="flex justify-between text-base">
-        <span className="font-semibold">Estimated Total</span>
+        <span className="font-semibold">{t("cart.total")}</span>
         <span className="font-display text-xl font-semibold text-teddy">
           {formatPrice(total)}
         </span>
       </div>
 
       {ctaHref ? (
-        <a
+        <Link
           href={ctaHref}
           className="btn-primary mt-6 w-full gap-2"
           aria-disabled={disabled}
@@ -58,7 +63,7 @@ export default function OrderSummary({
         >
           {ctaIcon}
           {ctaLabel}
-        </a>
+        </Link>
       ) : (
         <button
           type="submit"
@@ -71,9 +76,7 @@ export default function OrderSummary({
         </button>
       )}
 
-      <p className="mt-4 text-center text-xs text-taupe">
-        Every box is packed with care — and a little blessing tucked inside.
-      </p>
+      <p className="mt-4 text-center text-xs text-taupe">{t("cart.blessing")}</p>
     </div>
   );
 }

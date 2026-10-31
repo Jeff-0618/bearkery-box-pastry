@@ -1,5 +1,6 @@
-import type { Collection, Product, ProductVariant } from "./types";
+import type { CartItem, Collection, Product, ProductVariant } from "./types";
 import type { Lang } from "./language";
+import { getProduct } from "./data";
 
 /**
  * Reads the right language out of a product or collection record.
@@ -58,4 +59,23 @@ export function productText(product: Product, lang: Lang) {
 
 export function variantLabel(variant: ProductVariant, lang: Lang): string {
   return pick(variant.labelZh, variant.label, lang === "zh");
+}
+
+/**
+ * Name and flavour for a line that is already in the basket or an order.
+ *
+ * A cart line stores the English name and variant — that is what goes into the
+ * WhatsApp message and the order record, so the bakery reads the same words
+ * whichever language the customer browsed in. On screen it is looked up again
+ * from the live catalogue by slug / variant id, so a line added before a
+ * translation existed still shows in Chinese. If the product has since been
+ * removed from the catalogue it falls back to what was stored.
+ */
+export function cartLineText(item: CartItem, lang: Lang) {
+  const product = getProduct(item.slug);
+  const variant = product?.variants.find((v) => v.id === item.variant.id) ?? item.variant;
+  return {
+    name: product ? productText(product, lang).name : item.name,
+    variant: variantLabel(variant, lang),
+  };
 }

@@ -1,110 +1,79 @@
 # Bearkery Box Pastry
 
-A warm, premium handmade-bakery e-commerce experience for **Bearkery Box Pastry** (Seri Kembangan, Selangor) — built with **Next.js 14 (App Router)**, **TypeScript**, **Tailwind CSS**, and **Framer Motion**.
-
-The brand's own teddy bear mascot is the centerpiece of the site — see `public/illustrations/README.md` for the 10 illustration files the design still needs and exactly where each one appears.
+A warm handmade-bakery site for **Bearkery Box Pastry** (Seri Kembangan, Selangor), built with **Next.js 14 (App Router)**, **TypeScript**, **Tailwind CSS** and **Framer Motion**. Bilingual (English / 简体中文). Orders are placed through WhatsApp.
 
 ## Getting started
+
+Requires [Node.js](https://nodejs.org) LTS.
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000). For production: `npm run build` then `npm run start`.
 
-To build for production:
+## Configuration
 
-```bash
-npm run build
-npm run start
-```
+Copy `.env.example` to `.env.local` and fill it in. On Vercel, set the same names under **Project → Settings → Environment Variables**, then redeploy. Anything starting with `NEXT_PUBLIC_` is written into the browser bundle at build time — it is **not secret**.
 
-> Product photography (sandwiches, bento cakes, etc.) uses royalty-free Unsplash placeholder URLs in `lib/data.ts` — swap in real product photos before launch. Bento Cake pricing (RM18) is a placeholder — confirm real pricing before launch.
-
-## Design tokens
-
-| Token | Hex |
+| Variable | What it does |
 |---|---|
-| Primary | `#F5E7D3` |
-| Secondary | `#E8D5BE` |
-| Accent | `#C49A6C` |
-| Dark Brown (`bark`) | `#5A4433` |
-| Cream | `#FFF9F4` |
-| Gold | `#D6B37A` |
-| Dusty Pink | `#E7C3C1` |
-| Matcha | `#B9C4A9` |
-| Lavender | `#D6CFE8` |
-| Butter | `#F0D9A0` |
+| `NEXT_PUBLIC_SITE_URL` | The real domain (e.g. `https://bearkery-box-pastry.vercel.app`). Drives the sitemap, canonical links and share previews. Until it is set, `robots.txt` leaves the sitemap out. |
+| `NEXT_PUBLIC_ORDER_WEBHOOK` | Google Sheet intake URL. Every order is also sent there. See [`google-apps-script/README.md`](google-apps-script/README.md). |
+| `NEXT_PUBLIC_WEB3FORMS_KEY` | Free key from web3forms.com. Enables the contact-form email and the newsletter box. Without it the contact form opens WhatsApp instead and the newsletter box is hidden. |
+| `ADMIN_PASSWORD` | Password for `/admin` (server-side only, never `NEXT_PUBLIC_`). **If unset, `/admin` returns 404 in production.** |
 
-Typography: **Fraunces** (display/headlines) paired with **Manrope** (body/UI), loaded via `next/font/google` in `app/layout.tsx`.
+## How ordering works
 
-Currency: prices are formatted as Malaysian Ringgit (`RM`) via `lib/utils.ts`'s `formatPrice`.
+1. The customer builds a basket (variant, date, pickup/delivery, cake message).
+2. Checkout opens WhatsApp with the whole order prefilled (`lib/whatsapp-order.ts`). The bakery confirms availability, the final total and payment there. **No payment is taken on the site.**
+3. The order is also recorded: always in that browser's `localStorage`, and — if `NEXT_PUBLIC_ORDER_WEBHOOK` is set — in your Google Sheet. Without the webhook, orders placed on customers' phones are **not** visible to you.
+4. `/admin` shows the orders stored in the browser you open it in, with CSV/JSON export and reports. It is protected by `ADMIN_PASSWORD` (`middleware.ts`) and needs a host that runs Next.js middleware (Vercel does).
+
+Online payment is deliberately not wired up: `lib/payment.ts` lists the steps for adding a Malaysian gateway (Billplz / senangPay / iPay88) once a merchant account exists. Keep gateway secrets in server-side environment variables.
+
+## Language
+
+Interface text lives in two dictionaries in `lib/language.tsx` (`en` and `zh`); components call `t("some.key")`, and `t("some.key", { name: "Mia" })` fills `{name}` slots. Add a key to **both** dictionaries. A missing key falls back to English. Chinese strings use full-width punctuation（，。：？）.
+
+Product and collection wording lives beside the English in `lib/data.ts` (`nameZh`, `descriptionZh`, …) and is read through `lib/localize.ts`; a missing `…Zh` field falls back to English. Basket lines and saved orders keep the **English** name and flavour (that is what the WhatsApp message and the Sheet receive); `cartLineText()` looks up the Chinese for display only.
+
+Page `<title>` and meta descriptions stay English: there is one URL per page, not per language.
+
+## Deploying
+
+The site is deployed by Vercel from the `main` branch of the GitHub repository. Pushing to any other branch creates a **Preview** deployment with its own URL and leaves the live site alone — use that to check a change before merging it into `main`.
 
 ## Folder structure
 
 ```
 app/
-  layout.tsx                  Root layout, fonts, metadata, providers
-  page.tsx                    Home (Hero → Featured Cakes → Everyday
-                               Favourites → How To Order → About → Instagram)
-  collections/
-    page.tsx                  Collections index
-    [slug]/page.tsx            Collection detail (dynamic)
-    [slug]/loading.tsx          Skeleton state
-  product/
-    [slug]/page.tsx             Product detail (server: fetches product)
-    [slug]/ProductDetailClient.tsx  Interactive configurator (client)
-    [slug]/loading.tsx           Skeleton state
-  cart/page.tsx                Shopping cart
-  checkout/page.tsx            Checkout (customer details + pickup/delivery + order review)
-  order-confirmation/page.tsx  Order confirmation
-  about/page.tsx               About Us / brand story (5 sections)
-  faq/page.tsx + FaqAccordion.tsx    FAQ (accessible accordion)
-  contact/page.tsx + ContactForm.tsx Contact + real pickup info
-  sitemap.ts / robots.ts       SEO
-  not-found.tsx                Custom 404
-
-components/
-  layout/        Header, Footer, BearMark logo (small nav mark, not the mascot)
-  product/       ProductCard, StoryCollectionCard, VariantSelector,
-                 QuantitySelector, FulfillmentToggle,
-                 DeliveryDatePicker, GiftDetailsForm
-  cart/          CartLineItem, OrderSummary
-  home/          Hero, EverydayFavouritesSection, HowItWorks (How To Order),
-                 OurStory (About Bearkery teaser), Testimonials, InstagramGallery
-  shared/        SectionHeading, LazyImage, BearIllustration (mascot slot system)
-  ui/            Badge, Skeleton
-
+  layout.tsx            Root layout, fonts, metadata, structured data, providers
+  page.tsx              Home
+  about/ faq/ collections/   page.tsx (metadata) + *Client.tsx (interactive/bilingual UI)
+  contact/              page.tsx + ContactContent.tsx + ContactForm.tsx
+  product/[slug]/       Product page (server) + ProductDetailClient (configurator)
+  cart/ checkout/ order-confirmation/   Basket flow (noindex)
+  admin/                Orders & reports (noindex, password-protected)
+  sitemap.ts robots.ts not-found.tsx
+components/             layout/ home/ product/ cart/ shared/ ui/
 lib/
-  types.ts       Domain types (Product, CartItem, Order, etc.)
-  data.ts        Collections & products — Everyday Favourites and Bento Cake
-                 are real menu items; the rest are placeholder collections
-  cart-context.tsx  Cart state (React context + localStorage persistence)
-  utils.ts       Formatting (RM currency) & date helpers
+  data.ts               Collections and products (real menu, real prices, Chinese beside English)
+  localize.ts           Picks the right language from a record; cartLineText for basket lines
+  language.tsx          EN/ZH dictionaries and provider
+  business.ts           Phone, address, hours, WhatsApp links
+  order-sink.ts         Where orders are recorded (browser + optional webhook)
+  order-store.ts        Browser order store, CSV/JSON export
+  forms.ts              Web3Forms helper for contact + newsletter
+  site.ts               SITE_URL
+  payment.ts            Pluggable payment layer (demo only for now)
+middleware.ts           Password gate for /admin
+google-apps-script/     Code to paste into your Google Sheet
 ```
 
-## Collections
+## Before launch
 
-Everyday Favourites and Bento Cake carry real menu items and pricing.
-The remaining collections (Tiny Blessings, Double Happiness, Birthday
-Cakes, Cupcakes, Cake Rolls, Gift Boxes) are placeholder categories from
-the original site scope — keep, edit, or remove them as needed.
-
-## Shopping flow implemented
-
-1. **Home** — hero, featured cakes, Everyday Favourites menu, how-to-order steps, about teaser, Instagram gallery.
-2. **Collections** — all 8 collections with their own story copy.
-3. **Collection detail** — filtered product grid with breadcrumb.
-4. **Product detail** — image gallery, variant selector, quantity stepper, pickup/delivery toggle, preorder date picker (enforces each product's minimum lead time), gift details, add-to-cart / buy-now, related products.
-5. **Cart** — editable line items with gift/date summary, running subtotal.
-6. **Checkout** — contact + delivery form or real pickup info block, order review, summary sidebar, simulated payment step.
-7. **Order confirmation** — order number, fulfillment recap, itemized total.
-
-## Notes for production use
-
-- Replace `lib/data.ts` placeholder collections/pricing with your final catalog.
-- Checkout currently simulates order placement via `sessionStorage`; wire it to a real payment provider and order API.
-- Swap Unsplash placeholder URLs for owned photography, and update `next.config.mjs`'s `images.remotePatterns` accordingly.
-- Add the 10 mascot illustrations per `public/illustrations/README.md`.
-- All interactive controls are keyboard-accessible with visible focus states, `aria-*` labeling, and semantic form structure.
+- Set `NEXT_PUBLIC_SITE_URL`, `ADMIN_PASSWORD`, and (recommended) `NEXT_PUBLIC_ORDER_WEBHOOK` and `NEXT_PUBLIC_WEB3FORMS_KEY`.
+- The About page still uses two Unsplash stock photos (`app/about/AboutClient.tsx`); swap in real photos of the kitchen, then drop Unsplash from `images.remotePatterns` in `next.config.mjs`.
+- The `?demo=1` test button on checkout records a fake order (`is_demo = TRUE`) — delete such rows from the Sheet after testing.

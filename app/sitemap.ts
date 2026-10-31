@@ -1,24 +1,28 @@
 import { MetadataRoute } from "next";
 import { VISIBLE_COLLECTIONS, VISIBLE_PRODUCTS } from "@/lib/data";
+import { SITE_URL } from "@/lib/site";
 
-const BASE_URL = "https://bearkerybox.example";
+// Pages that are personal to a visitor (/cart, /checkout, /order-confirmation)
+// and /admin are deliberately left out.
+const STATIC_ROUTES = ["", "/collections", "/about", "/faq", "/contact"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = ["", "/collections", "/about", "/faq", "/contact", "/cart"].map(
-    (path) => ({
-      url: `${BASE_URL}${path}`,
-      lastModified: new Date(),
-    })
-  );
+  const staticRoutes = STATIC_ROUTES.map((path) => ({
+    url: `${SITE_URL}${path}`,
+    changeFrequency: "monthly" as const,
+    priority: path === "" ? 1 : 0.7,
+  }));
 
   const collectionRoutes = VISIBLE_COLLECTIONS.map((c) => ({
-    url: `${BASE_URL}/collections/${c.slug}`,
-    lastModified: new Date(),
+    url: `${SITE_URL}/collections/${c.slug}`,
+    changeFrequency: "weekly" as const,
+    priority: 0.8,
   }));
 
   const productRoutes = VISIBLE_PRODUCTS.map((p) => ({
-    url: `${BASE_URL}/product/${p.slug}`,
-    lastModified: new Date(),
+    url: `${SITE_URL}/product/${p.slug}`,
+    changeFrequency: "weekly" as const,
+    priority: 0.8,
   }));
 
   return [...staticRoutes, ...collectionRoutes, ...productRoutes];

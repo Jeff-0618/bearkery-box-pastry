@@ -34,6 +34,10 @@ export default function WhatsappFab() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={t("fab.order")}
+      // Invisible until scrolled: keep it out of the tab order and the
+      // accessibility tree so keyboard users don't land on a hidden link.
+      tabIndex={shown ? 0 : -1}
+      aria-hidden={!shown}
       style={{ bottom: "calc(1rem + env(safe-area-inset-bottom))" }}
       className={cx(
         "fixed right-4 z-[80] flex items-center gap-2 rounded-pill bg-[#25D366] px-4 py-3 sm:right-5 sm:px-5 sm:py-3.5",

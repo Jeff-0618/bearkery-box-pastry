@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { VISIBLE_PRODUCTS, getProduct, getRelatedProducts } from "@/lib/data";
+import { BUSINESS } from "@/lib/business";
+import { SITE_URL } from "@/lib/site";
 import ProductDetailClient from "./ProductDetailClient";
 
 export function generateStaticParams() {
@@ -26,5 +28,43 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   if (!product) notFound();
   const related = getRelatedProducts(product);
 
-  return <ProductDetailClient product={product} related={related} />;
+  // Product structured data (price range, preorder status) for search results.
+  // Prices are the ones in lib/data.ts; "enquire only" variants are skipped.
+  const prices = product.variants
+    .map((v) => v.price)
+    .filter((p): p is number => p !== null);
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.description,
+    image: product.images.map((src) => `${SITE_URL}${src}`),
+    brand: { "@type": "Brand", name: BUSINESS.name },
+    ...(prices.length > 0 && {
+      offers: {
+        "@type": "AggregateOffer",
+        priceCurrency: "MYR",
+        lowPrice: Math.min(...prices),
+        highPrice: Math.max(...prices),
+        offerCount: prices.length,
+        availability: product.isPreorderOnly
+          ? "https://schema.org/PreOrder"
+          : "https://schema.org/InStock",
+        url: `${SITE_URL}/product/${product.slug}`,
+      },
+    }),
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        // "<" is escaped so no string in the data can close the tag early.
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
+      <ProductDetailClient product={product} related={related} />
+    </>
+  );
 }

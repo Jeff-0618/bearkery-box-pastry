@@ -2,13 +2,16 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ShoppingBag } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
 import { VISIBLE_COLLECTIONS } from "@/lib/data";
 import { useLang } from "@/lib/language";
+import { collectionText } from "@/lib/localize";
+import { cx } from "@/lib/utils";
 import LanguageToggle from "./LanguageToggle";
 import ThemeToggle from "./ThemeToggle";
 
@@ -22,10 +25,19 @@ const NAV_LINKS = [
 export default function Header() {
   const [open, setOpen] = useState(false);
   const { count } = useCart();
-  const { t } = useLang();
+  const { t, lang } = useLang();
+  const pathname = usePathname() ?? "";
   const [mounted, setMounted] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const drawerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => setMounted(true), []);
+
+  // A link tapped inside the drawer navigates; make sure the drawer follows.
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   // Stop the page behind the drawer from scrolling while it's open.
   useEffect(() => {
@@ -34,6 +46,43 @@ export default function Header() {
       document.body.style.overflow = "";
     };
   }, [open]);
+
+  // Keyboard behaviour for the drawer: Escape closes it, Tab stays inside it,
+  // focus moves in on open and returns to the menu button on close.
+  useEffect(() => {
+    if (!open) return;
+    const opener = menuButtonRef.current;
+    closeButtonRef.current?.focus();
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        return;
+      }
+      if (e.key !== "Tab") return;
+      const focusable = drawerRef.current?.querySelectorAll<HTMLElement>(
+        "a[href], button:not([disabled])"
+      );
+      if (!focusable || focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      opener?.focus();
+    };
+  }, [open]);
+
+  const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
   return (
     <>
@@ -54,7 +103,7 @@ export default function Header() {
         <Link
           href="/"
           className="flex min-w-0 items-center gap-2 overflow-hidden sm:gap-2.5"
-          aria-label="Bearkery Box Pastry home"
+          aria-label={t("nav.homeAria")}
         >
           <Image
             src="/logo-mark.png"
@@ -74,7 +123,11 @@ export default function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-cocoa transition hover:text-teddy"
+              aria-current={isActive(link.href) ? "page" : undefined}
+              className={cx(
+                "text-sm font-medium transition hover:text-teddy",
+                isActive(link.href) ? "text-teddy" : "text-cocoa"
+              )}
             >
               {t(link.key)}
             </Link>
@@ -89,19 +142,22 @@ export default function Header() {
             className="relative flex h-10 w-10 items-center justify-center rounded-full border border-line text-cocoa transition hover:bg-cream sm:h-11 sm:w-11"
             aria-label={`${t("nav.cart")} (${count})`}
           >
-            <ShoppingBag size={18} strokeWidth={1.75} />
+            <ShoppingBag size={18} strokeWidth={1.75} aria-hidden="true" />
             {count > 0 && (
-              <span key={count} className="animate-popIn absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-teddy px-1 text-[11px] font-bold text-milk">
+              <span key={count} aria-hidden="true" className="animate-popIn absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-teddy px-1 text-[11px] font-bold text-milk">
                 {count}
               </span>
             )}
           </Link>
           <button
+            ref={menuButtonRef}
             onClick={() => setOpen(true)}
             className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-cocoa sm:h-11 sm:w-11 md:hidden"
-            aria-label="Open menu"
+            aria-label={t("nav.openMenu")}
+            aria-haspopup="dialog"
+            aria-expanded={open}
           >
-            <Menu size={18} />
+            <Menu size={18} aria-hidden="true" />
           </button>
         </div>
       </div>
@@ -120,21 +176,26 @@ export default function Header() {
             onClick={() => setOpen(false)}
           >
             <motion.div
+              ref={drawerRef}
+              role="dialog"
+              aria-modal="true"
+              aria-label={t("nav.menu")}
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "tween", duration: 0.3 }}
-              className="ml-auto flex h-full w-4/5 max-w-xs flex-col bg-milk p-6"
+              className="ml-auto flex h-full w-4/5 max-w-xs flex-col overflow-y-auto bg-milk p-6"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="mb-8 flex items-center justify-between">
                 <span className="font-display text-lg font-semibold">{t("nav.menu")}</span>
                 <button
+                  ref={closeButtonRef}
                   onClick={() => setOpen(false)}
-                  aria-label="Close menu"
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-line"
+                  aria-label={t("nav.closeMenu")}
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-line"
                 >
-                  <X size={16} />
+                  <X size={16} aria-hidden="true" />
                 </button>
               </div>
               <nav className="flex flex-col gap-5" aria-label="Mobile">
@@ -143,7 +204,11 @@ export default function Header() {
                     key={link.href}
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    className="text-base font-medium text-cocoa"
+                    aria-current={isActive(link.href) ? "page" : undefined}
+                    className={cx(
+                      "text-base font-medium",
+                      isActive(link.href) ? "text-teddy" : "text-cocoa"
+                    )}
                   >
                     {t(link.key)}
                   </Link>
@@ -159,7 +224,7 @@ export default function Header() {
                       onClick={() => setOpen(false)}
                       className="text-sm text-taupe hover:text-teddy"
                     >
-                      {c.name}
+                      {collectionText(c, lang).name}
                     </Link>
                   ))}
                 </div>

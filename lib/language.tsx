@@ -274,6 +274,98 @@ const en: Dict = {
   "common.explore": "Explore",
   "common.home": "Home",
   "common.backHome": "Back to Home",
+  "common.loading": "Loading…",
+
+  // ---- header (screen-reader labels) ----
+  "nav.openMenu": "Open menu",
+  "nav.closeMenu": "Close menu",
+  "nav.homeAria": "Bearkery Box Pastry home",
+
+  // ---- basket & order summary ----
+  "cart.for": "For {name}",
+  "cart.giftCard": "Gift card added",
+  "cart.removeAria": "Remove {name} from cart",
+  "cart.subtotalOne": "Subtotal ({n} item)",
+  "cart.subtotalMany": "Subtotal ({n} items)",
+  "cart.deliveryPickup": "Delivery / Pickup",
+  "cart.confirmedWithYou": "Confirmed with you",
+  "cart.blessing": "Every box is packed with care — and a little blessing tucked inside.",
+
+  // ---- checkout ----
+  "co.emptyTitle": "Nothing to check out yet",
+  "co.emptyBody": "Add something to your basket before checking out.",
+  "co.browse": "Browse the menu",
+  "co.title": "Checkout",
+  "co.notice": "We don't take online payment yet. Send your order through WhatsApp and we'll confirm availability, the final total, and payment with you directly.",
+  "co.details": "Your details",
+  "co.fullName": "Full name",
+  "co.phone": "Phone number",
+  "co.email": "Email (optional)",
+  "co.address": "Where should our little bear deliver your blessing?",
+  "co.city": "City",
+  "co.postal": "Postal code",
+  "co.pickupAt": "Pickup at",
+  "co.pickupHours": "Pickup hours: {hours} · {phone}",
+  "co.notes": "Order notes (optional)",
+  "co.review": "Review items",
+  "co.send": "Send Order via WhatsApp",
+  "co.sending": "Opening WhatsApp…",
+  "co.needDetails": "Add your name and a valid phone number to continue.",
+  "co.phoneInvalid": "Please enter a valid phone number.",
+  "co.error": "Something went wrong saving your order. Please try again, or message us on WhatsApp.",
+
+  // ---- order confirmation ----
+  "oc.notFoundTitle": "We couldn't find that order",
+  "oc.notFoundBody": "It may already be complete, or the link has expired.",
+  "oc.thanks": "Thank you, {name}.",
+  "oc.friend": "friend",
+  "oc.opened": "Your order details have been opened in WhatsApp. Please send the message so we receive it — we'll reply to confirm availability and the final total.",
+  "oc.didntOpen": "Didn't open? Message us",
+  "oc.ref": "Order ref {id}",
+  "oc.collection": "Collection",
+  "oc.date": "Date: {date}",
+  "oc.total": "Order total",
+  "oc.finalNote": "Final total is confirmed by us before payment.",
+  "oc.items": "Items",
+  "oc.continue": "Continue Browsing",
+
+  // ---- contact ----
+  "contact.eyebrow": "We'd love to hear from you",
+  "contact.title": "Get in touch",
+  "contact.desc": "Questions about an order, a special request, or just want to say hello?",
+  "contact.phone": "Phone",
+  "contact.address": "Pickup Address",
+  "contact.hours": "Pickup Hours",
+  "contact.sandwiches": "Sandwiches {hours}",
+  "form.name": "Name",
+  "form.email": "Email",
+  "form.subject": "Subject",
+  "form.message": "Message",
+  "contact.sent": "Message sent",
+  "contact.thanks": "Thank you, {name} — we'll get back to you within one business day.",
+  "contact.error": "Something went wrong sending that — please try again, or call us directly.",
+  "contact.send": "Send Message",
+  "contact.sendWhatsapp": "Send via WhatsApp",
+  "contact.sending": "Sending…",
+
+  // ---- footer extras & newsletter ----
+  "footer.allCollections": "All Collections",
+  "footer.newsletterTitle": "Stay close to the oven",
+  "footer.newsletterBody": "New collections and gifting ideas, once or twice a month.",
+  "footer.madeWith": "Made with warmth, sugar, and a little bit of bear magic.",
+  "newsletter.aria": "Newsletter subscription",
+  "newsletter.label": "Email address",
+  "newsletter.join": "Join",
+  "newsletter.thanks": "Thank you — you're on the list.",
+  "newsletter.error": "Couldn't sign you up just now — please try again.",
+
+  // ---- 404 & photo viewer ----
+  "nf.title": "This page wandered off",
+  "nf.body": "We couldn't find that one. Let's get you back to something sweet.",
+  "lb.viewer": "Photo viewer",
+  "lb.close": "Close",
+  "lb.prev": "Previous photo",
+  "lb.next": "Next photo",
 };
 
 const zh: Dict = {
@@ -506,20 +598,122 @@ const zh: Dict = {
   "common.explore": "查看",
   "common.home": "首页",
   "common.backHome": "回到首页",
+  "common.loading": "载入中……",
+
+  // ---- header (screen-reader labels) ----
+  "nav.openMenu": "打开选单",
+  "nav.closeMenu": "关闭选单",
+  "nav.homeAria": "Bearkery Box Pastry 首页",
+
+  // ---- basket & order summary ----
+  "cart.for": "送给 {name}",
+  "cart.giftCard": "已附小卡",
+  "cart.removeAria": "从礼物篮移除 {name}",
+  "cart.subtotalOne": "小计（{n} 件）",
+  "cart.subtotalMany": "小计（{n} 件）",
+  "cart.deliveryPickup": "外送 / 自取",
+  "cart.confirmedWithYou": "由我们与你确认",
+  "cart.blessing": "每一盒都用心包装 — 里头还藏着一份小小的祝福。",
+
+  // ---- checkout ----
+  "co.emptyTitle": "还没有可结账的东西",
+  "co.emptyBody": "结账前，请先把喜欢的放进礼物篮。",
+  "co.browse": "浏览菜单",
+  "co.title": "结账",
+  "co.notice": "我们暂时还不提供线上付款。请透过 WhatsApp 送出订单，我们会直接与你确认库存、最终总额与付款方式。",
+  "co.details": "你的资料",
+  "co.fullName": "姓名",
+  "co.phone": "电话号码",
+  "co.email": "电邮（选填）",
+  "co.address": "我们的小熊要把祝福送到哪里？",
+  "co.city": "城市",
+  "co.postal": "邮区编号",
+  "co.pickupAt": "取货地点",
+  "co.pickupHours": "取货时间：{hours} · {phone}",
+  "co.notes": "订单备注（选填）",
+  "co.review": "核对商品",
+  "co.send": "透过 WhatsApp 送出订单",
+  "co.sending": "正在开启 WhatsApp……",
+  "co.needDetails": "请填写姓名与有效的电话号码后继续。",
+  "co.phoneInvalid": "请输入有效的电话号码。",
+  "co.error": "保存订单时出了点问题。请再试一次，或直接 WhatsApp 联络我们。",
+
+  // ---- order confirmation ----
+  "oc.notFoundTitle": "找不到这张订单",
+  "oc.notFoundBody": "订单可能已经完成，或链接已失效。",
+  "oc.thanks": "谢谢你，{name}。",
+  "oc.friend": "朋友",
+  "oc.opened": "订单内容已在 WhatsApp 中打开。请按下送出，我们才会收到 — 我们会回覆确认库存与最终总额。",
+  "oc.didntOpen": "没有打开？直接联络我们",
+  "oc.ref": "订单编号 {id}",
+  "oc.collection": "取货安排",
+  "oc.date": "日期：{date}",
+  "oc.total": "订单总额",
+  "oc.finalNote": "最终总额会在付款前由我们确认。",
+  "oc.items": "商品",
+  "oc.continue": "继续逛逛",
+
+  // ---- contact ----
+  "contact.eyebrow": "期待听到你的声音",
+  "contact.title": "联络我们",
+  "contact.desc": "关于订单的疑问、特别要求，或只是想打声招呼？",
+  "contact.phone": "电话",
+  "contact.address": "取货地址",
+  "contact.hours": "取货时间",
+  "contact.sandwiches": "三文治 {hours}",
+  "form.name": "姓名",
+  "form.email": "电邮",
+  "form.subject": "主题",
+  "form.message": "留言",
+  "contact.sent": "讯息已送出",
+  "contact.thanks": "谢谢你，{name} — 我们会在一个工作天内回覆。",
+  "contact.error": "送出时出了点问题 — 请再试一次，或直接致电给我们。",
+  "contact.send": "送出讯息",
+  "contact.sendWhatsapp": "透过 WhatsApp 送出",
+  "contact.sending": "送出中……",
+
+  // ---- footer extras & newsletter ----
+  "footer.allCollections": "全部产品",
+  "footer.newsletterTitle": "留在烤箱旁",
+  "footer.newsletterBody": "新系列与送礼灵感，每月一两次。",
+  "footer.madeWith": "用温暖、糖，和一点点小熊魔法做成。",
+  "newsletter.aria": "订阅电子报",
+  "newsletter.label": "电邮地址",
+  "newsletter.join": "加入",
+  "newsletter.thanks": "谢谢你 — 已加入名单。",
+  "newsletter.error": "暂时无法完成订阅 — 请再试一次。",
+
+  // ---- 404 & photo viewer ----
+  "nf.title": "这个页面走丢了",
+  "nf.body": "找不到这个页面。我们带你回到甜甜的地方吧。",
+  "lb.viewer": "相片检视",
+  "lb.close": "关闭",
+  "lb.prev": "上一张",
+  "lb.next": "下一张",
 };
 
 const DICTS: Record<Lang, Dict> = { en, zh };
 
+type Vars = Record<string, string | number>;
+
+/** Fills {name}-style slots; a slot with no matching value is left as written. */
+function interpolate(text: string, vars?: Vars): string {
+  if (!vars) return text;
+  return text.replace(/\{(\w+)\}/g, (slot, name: string) =>
+    name in vars ? String(vars[name]) : slot
+  );
+}
+
 interface LangValue {
   lang: Lang;
   setLang: (l: Lang) => void;
-  t: (key: string) => string;
+  t: (key: string, vars?: Vars) => string;
 }
 
 const LangContext = createContext<LangValue>({
   lang: "en",
   setLang: () => {},
-  t: (k) => en[k] ?? k,
+  t: (k, vars) => interpolate(en[k] ?? k, vars),
 });
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
@@ -530,7 +724,11 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     try {
       const saved = window.localStorage.getItem(STORAGE_KEY) as Lang | null;
-      if (saved === "en" || saved === "zh") setLangState(saved);
+      if (saved === "en" || saved === "zh") {
+        setLangState(saved);
+        // Keep <html lang> in step with a restored choice, not only a click.
+        document.documentElement.lang = saved === "zh" ? "zh-CN" : "en";
+      }
     } catch {
       /* storage unavailable — stay on English */
     }
@@ -538,16 +736,18 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   const setLang = useCallback((l: Lang) => {
     setLangState(l);
+    // Set the document language first so a storage failure can't skip it.
+    document.documentElement.lang = l === "zh" ? "zh-CN" : "en";
     try {
       window.localStorage.setItem(STORAGE_KEY, l);
-      document.documentElement.lang = l === "zh" ? "zh-CN" : "en";
     } catch {
       /* ignore */
     }
   }, []);
 
   const t = useCallback(
-    (key: string) => DICTS[lang][key] ?? en[key] ?? key,
+    (key: string, vars?: Vars) =>
+      interpolate(DICTS[lang][key] ?? en[key] ?? key, vars),
     [lang]
   );
 

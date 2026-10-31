@@ -1,5 +1,6 @@
 "use client";
 
+import { useId } from "react";
 import { Minus, Plus } from "lucide-react";
 import { useLang } from "@/lib/language";
 
@@ -15,14 +16,17 @@ export default function QuantitySelector({
   max?: number;
 }) {
   const { t } = useLang();
+  // One id per instance — the basket renders a selector for every line, so a
+  // fixed id would be repeated on the page.
+  const labelId = useId();
 
   return (
     <div>
-      <p className="label-bx" id="qty-label">{t("product.quantity")}</p>
+      <p className="label-bx" id={labelId}>{t("product.quantity")}</p>
       <div
         className="inline-flex items-center rounded-full border border-line bg-surface"
         role="group"
-        aria-labelledby="qty-label"
+        aria-labelledby={labelId}
       >
         <button
           type="button"

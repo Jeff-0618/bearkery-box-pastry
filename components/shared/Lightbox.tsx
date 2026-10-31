@@ -1,10 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { useLang } from "@/lib/language";
 
 /**
  * Tap a photo to see it full size.
@@ -27,8 +28,19 @@ export default function Lightbox({
 }) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
+  const { t } = useLang();
+  const closeRef = useRef<HTMLButtonElement>(null);
 
   const open = index !== null;
+
+  // Move focus into the viewer when it opens and put it back on whatever
+  // opened it when it closes, so keyboard users don't lose their place.
+  useEffect(() => {
+    if (!open) return;
+    const opener = document.activeElement as HTMLElement | null;
+    closeRef.current?.focus();
+    return () => opener?.focus?.();
+  }, [open]);
 
   const step = useCallback(
     (delta: number) => {
@@ -67,11 +79,12 @@ export default function Lightbox({
           className="fixed inset-0 z-[120] flex items-center justify-center bg-[#2A211B]/92 p-4"
           role="dialog"
           aria-modal="true"
-          aria-label="Photo viewer"
+          aria-label={t("lb.viewer")}
         >
           <button
+            ref={closeRef}
             onClick={onClose}
-            aria-label="Close"
+            aria-label={t("lb.close")}
             className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur transition hover:bg-white/20"
           >
             <X size={20} />
@@ -84,7 +97,7 @@ export default function Lightbox({
                   e.stopPropagation();
                   step(-1);
                 }}
-                aria-label="Previous photo"
+                aria-label={t("lb.prev")}
                 className="absolute left-3 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur transition hover:bg-white/20 sm:left-6"
               >
                 <ChevronLeft size={22} />
@@ -94,7 +107,7 @@ export default function Lightbox({
                   e.stopPropagation();
                   step(1);
                 }}
-                aria-label="Next photo"
+                aria-label={t("lb.next")}
                 className="absolute right-3 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur transition hover:bg-white/20 sm:right-6"
               >
                 <ChevronRight size={22} />

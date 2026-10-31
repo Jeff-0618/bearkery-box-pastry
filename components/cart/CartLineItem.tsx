@@ -5,12 +5,16 @@ import { Trash2 } from "lucide-react";
 import { CartItem } from "@/lib/types";
 import { formatPrice, formatReadableDate } from "@/lib/utils";
 import { useCart } from "@/lib/cart-context";
+import { useLang } from "@/lib/language";
+import { cartLineText } from "@/lib/localize";
 import QuantitySelector from "@/components/product/QuantitySelector";
 import LazyImage from "@/components/shared/LazyImage";
 import { Badge } from "@/components/ui/Badge";
 
 export default function CartLineItem({ item }: { item: CartItem }) {
   const { updateQuantity, removeItem } = useCart();
+  const { t, lang } = useLang();
+  const line = cartLineText(item, lang);
 
   return (
     <motion.div
@@ -27,7 +31,7 @@ export default function CartLineItem({ item }: { item: CartItem }) {
       */}
       <LazyImage
         src={item.image}
-        alt={item.name}
+        alt={line.name}
         sizes="96px"
         className="h-24 w-24 shrink-0 rounded-soft"
       />
@@ -35,8 +39,8 @@ export default function CartLineItem({ item }: { item: CartItem }) {
       <div className="flex flex-1 flex-col gap-1.5">
         <div className="flex items-start justify-between gap-3">
           <div>
-            <h3 className="font-display text-base font-medium">{item.name}</h3>
-            <p className="text-sm text-taupe">{item.variant.label}</p>
+            <h3 className="font-display text-base font-medium">{line.name}</h3>
+            <p className="text-sm text-taupe">{line.variant}</p>
           </div>
           <span className="font-display text-base font-medium text-teddy">
             {formatPrice(item.unitPrice * item.quantity)}
@@ -45,10 +49,11 @@ export default function CartLineItem({ item }: { item: CartItem }) {
 
         <div className="flex flex-wrap items-center gap-1.5">
           <Badge tone="default">
-            {item.fulfillment === "delivery" ? "Delivery" : "Pickup"} · {formatReadableDate(item.deliveryDate)}
+            {item.fulfillment === "delivery" ? t("fulfillment.delivery") : t("fulfillment.pickup")} ·{" "}
+            {formatReadableDate(item.deliveryDate, lang === "zh" ? "zh-CN" : "en-US")}
           </Badge>
-          {item.gift.recipientName && <Badge>For {item.gift.recipientName}</Badge>}
-          {item.gift.isGift && <Badge tone="peach">Gift card added</Badge>}
+          {item.gift.recipientName && <Badge>{t("cart.for", { name: item.gift.recipientName })}</Badge>}
+          {item.gift.isGift && <Badge tone="peach">{t("cart.giftCard")}</Badge>}
         </div>
 
         {item.gift.cakeMessage && (
@@ -63,10 +68,10 @@ export default function CartLineItem({ item }: { item: CartItem }) {
           <button
             onClick={() => removeItem(item.id)}
             className="flex items-center gap-1.5 text-xs font-medium text-taupe transition hover:text-red-600"
-            aria-label={`Remove ${item.name} from cart`}
+            aria-label={t("cart.removeAria", { name: line.name })}
           >
-            <Trash2 size={14} />
-            Remove
+            <Trash2 size={14} aria-hidden="true" />
+            {t("cart.remove")}
           </button>
         </div>
       </div>

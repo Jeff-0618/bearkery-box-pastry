@@ -12,10 +12,15 @@ export function toISODate(d: Date) {
   return d.toISOString().split("T")[0];
 }
 
-export function formatReadableDate(iso: string) {
+/**
+ * `locale` defaults to English because this also feeds the WhatsApp message
+ * and order records, which must read the same for the bakery whichever
+ * language the customer browsed in. Pass "zh-CN" for on-screen display only.
+ */
+export function formatReadableDate(iso: string, locale = "en-US") {
   if (!iso) return "";
   const d = new Date(iso + "T00:00:00");
-  return d.toLocaleDateString("en-US", {
+  return d.toLocaleDateString(locale, {
     weekday: "short",
     month: "short",
     day: "numeric",
